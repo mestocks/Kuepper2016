@@ -1,0 +1,9 @@
+#! /bin/bash
+
+
+
+for dir in "$@"; 
+    do 
+        f=$dir"/process_radtags.log"; 
+        grep "^Barcode.*Retained$" -A 41 $f | grep "^Barcode" -v | awk -F$'\t' -v file=$f -- ' { gsub("sout","",file); n=split(file,a,"/"); print a[n-1],$1,$2,$3,$4,$5 } '; 
+done
