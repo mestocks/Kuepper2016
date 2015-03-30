@@ -42,7 +42,7 @@ varaln = $(addprefix $(ALN)var_,$(refnam))
 varALN = $(addsuffix .vcf.gz,$(varALN))
 
 .PHONY:	mpileup
-mpileup:	$(varALN)
+mpileup:	$(varALN) $(allALN)
 
 $(ALN)var_%.vcf.gz:	$(FBAM)bm_%_*.bam
 	samtools mpileup -f $(ASS)$*.fa -Dsg $^ | bcftools view -v -g - | gzip > $@
