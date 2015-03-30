@@ -30,20 +30,20 @@ EXC = $(addprefix $(MAP)exc_,$(exc))
 bam = $(addsuffix .bam,$(REFLIB))
 bai = $(addsuffix .bam.bai,$(REFLIB))
 
-rbam = $(addsuffix _rmd.bam,$(REFLIB))
-rbai = $(addsuffix _rmd.bam.bai,$(REFLIB))
+#rbam = $(addsuffix _rmd.bam,$(REFLIB))
+#rbai = $(addsuffix _rmd.bam.bai,$(REFLIB))
 
-bmBAM = $(addprefix $(MAP)bm_,$(bam))
-bmBAI = $(addprefix $(MAP)bm_,$(bai))
+bmBAM = $(addprefix $(FBAM)bm_,$(bam))
+bmBAI = $(addprefix $(FBAM)bm_,$(bai))
 
-pmBAM = $(addprefix $(MAP)upm_,$(bam))
-pmBAI = $(addprefix $(MAP)upm_,$(bai))
+pmBAM = $(addprefix $(FBAM)upm_,$(bam))
+pmBAI = $(addprefix $(FBAM)upm_,$(bai))
 
-r1BAM = $(addprefix $(MAP)r1_,$(bam))
-r1BAI = $(addprefix $(MAP)r1_,$(bai))
+#r1BAM = $(addprefix $(MAP)r1_,$(bam))
+#r1BAI = $(addprefix $(MAP)r1_,$(bai))
 
-rmdBAM = $(addprefix $(MAP),$(rbam))
-rmdBAI = $(addprefix $(MAP),$(rbai))
+#rmdBAM = $(addprefix $(MAP),$(rbam))
+#rmdBAI = $(addprefix $(MAP),$(rbai))
 
 bmStat = $(subst .bam,.stat,$(bmBAM))
 rmdStat = $(subst .bam,.stat,$(rmdBAM))
