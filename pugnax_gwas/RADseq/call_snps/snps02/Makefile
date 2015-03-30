@@ -36,10 +36,10 @@ bmBAI = $(addprefix $(FBAM)bm_,$(bai))
 ###### ######
 
 allaln = $(addprefix $(ALN)all_,$(refnam))
-allALN = $(addsuffix .vcf.gz,$(allALN))
+allALN = $(addsuffix .vcf.gz,$(allaln))
 
 varaln = $(addprefix $(ALN)var_,$(refnam))
-varALN = $(addsuffix .vcf.gz,$(varALN))
+varALN = $(addsuffix .vcf.gz,$(varaln))
 
 .PHONY:	mpileup
 mpileup:	$(varALN) $(allALN)
