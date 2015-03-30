@@ -1,0 +1,9 @@
+
+
+#reapr smaltmap ALLPATHS_001_SSPACE.fa illumina/2013_SOL_MB1386_bwa_mapped_reads_pe_no_contamination_R_1.trimmed.fastq illumina/2013_SOL_MB1386_bwa_mapped_reads_pe_no_contamination_R_2.trimmed.fastq ALLPATHS_001_SSPACE_MB1386.bam
+
+.PHONY:	map-ALLPATHS_001_SSPACE
+map-ALLPATHS_001_SSPACE:	ALLPATHS_001_SSPACE/ALLPATHS_001_SSPACE_MB1390.bam
+
+ALLPATHS_001_SSPACE/ALLPATHS_001_SSPACE_%.bam:	ALLPATHS_001_SSPACE/ALLPATHS_001_SSPACE ALLPATHS_001_SSPACE/illumina/2013_SOL_%_bwa_mapped_reads_pe_no_contamination_R_1.trimmed.fastq ALLPATHS_001_SSPACE/illumina/2013_SOL_%_bwa_mapped_reads_pe_no_contamination_R_2.trimmed.fastq
+	reapr smaltmap $^ $@
