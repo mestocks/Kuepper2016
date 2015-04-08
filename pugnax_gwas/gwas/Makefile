@@ -745,3 +745,29 @@ $(GEN)raw_fo_%_dp5.ped:	$(GEN)raw_fo5_%_edit.vcf
 
 $(GEN)raw_%_edit.vcf:	$(ALN)%.vcf.gz
 	zcat $^ | awk ' BEGIN { OFS = "\t"}; { gsub("Contig","chr",$$0); gsub("Scaffold","chr",$$0); gsub("scaffold","chr",$$0); gsub("contig=<ID=C","contig=<ID=chr",$$0); if ($$0 ~ "^#") a=1; else gsub("C","chr",$$1) ; if ($$4 != "N") print $$0 } ' > $@
+
+###### ######
+
+GEN2 = $(GWS)GenABEL2/
+
+.PHONY:	new-create-new
+new-create-new:	$(GEN2)raw_RUFFv0.2_dp6.ped
+
+$(GEN2)%.raw:	$(GEN2)%.tped
+	Rscript tped2raw.r $^ $(GEN2)$*.tfam $@
+
+$(GEN2)%.tped:	$(GEN2)raw_%.tped
+	awk ' { split($$2,a,":"); b=substr(a[1],4,length(a[1])); $$1=b; r+=1; rs=""; while (length(rs)+length(r) != 7) rs=rs"0"; $$2="rs"rs; $$2=$$2r; print $$0 } ' $^ | awk ' BEGIN { a=0; b=0 }; { if (a == 0) { a=1; for (i=5; i<=NF; i++) { if ($$i != 0) b=1 } if (b == 0) { printf $$1" "$$2" "$$3" "$$4" "; for (j=5; j<=NF; j++) { printf "G " } print "" } else print $$0 } else print $$0 } ' > $@	
+	mv $(GEN2)raw_$*.tfam $(GEN2)$*.tfam
+
+
+$(GEN2)raw_%.tped:	$(GEN2)raw_%.ped
+	plink --noweb --file $(GEN2)raw_$* --recode --transpose --out $(GEN2)raw_$*
+
+
+$(GEN2)raw_%_dp6.ped:	$(GEN2)raw_%_edit.vcf
+	vcftools --vcf $^ --minDP 6 --remove-indels --plink --out $(GEN2)raw_$*_dp6
+
+
+$(GEN2)raw_%_edit.vcf:	$(ALN)var_%.vcf.gz
+	zcat $^ | awk ' BEGIN { OFS = "\t"}; { gsub("Contig","chr",$$0); gsub("Scaffold","chr",$$0); gsub("scaffold","chr",$$0); gsub("contig=<ID=C","contig=<ID=chr",$$0); if ($$0 ~ "^#") a=1; else gsub("C","chr",$$1) ; if ($$4 != "N") print $$0 } ' > $@
