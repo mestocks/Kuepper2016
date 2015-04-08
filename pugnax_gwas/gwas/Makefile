@@ -750,8 +750,8 @@ $(GEN)raw_%_edit.vcf:	$(ALN)%.vcf.gz
 
 GEN2 = $(GWS)GenABEL2/
 
-.PHONY:	new-create-new
-new-create-new:	$(GEN2)raw_RUFFv0.2_dp6.ped $(GEN2)RUFFv0.2_dp6.tped $(GEN2)RUFFv0.2_dp6.raw
+.PHONY:	new-create-raw
+new-create-raw:	$(GEN2)raw_RUFFv0.2_dp6.ped $(GEN2)RUFFv0.2_dp6.tped $(GEN2)RUFFv0.2_dp6.raw
 
 $(GEN2)%.raw:	$(GEN2)%.tped
 	Rscript tped2raw.r $^ $(GEN2)$*.tfam $@
