@@ -750,6 +750,47 @@ $(GEN)raw_%_edit.vcf:	$(ALN)%.vcf.gz
 
 GEN2 = $(GWS)GenABEL2/
 
+ref2 = RUFFv0.2.fa
+refnam2 = $(subst .fa,,$(ref2))
+
+###### ######
+
+GEN-IN2 = $(addprefix $(GEN2)bm_,$(refnam2))
+
+phe-in2 = $(subst $(GEN2),$(GEN2)phe_,$(GEN-IN2))
+PHE-IN2 = $(addsuffix .txt,$(phe-in2))
+
+
+.PHONY:	new-create-phe
+new-create-phe:	$(PHE-IN2) $(GEN2)phe_bm_RUFFv0.2.txt
+
+
+$(GEN2)phe_%.txt:	$(GEN2)phe_bamids_%.txt $(GEN2)phe_base.txt $(GEN2)tag_info.txt
+	paste $^ > $@
+
+
+$(GEN2)phe_bamids_%.txt:	$(ALN)%.vcf.gz
+	zcat $^ | grep "#CHROM" | awk ' { for (i=10; i<=NF; i++) print $$i } ' | sort | awk ' BEGIN { print "id" }; { print $$0 } ' > $@
+
+
+$(GEN2)phe_base.txt:	$(GEN2)phenotypes_sorted.txt
+	cat $^ | sort -k 2 | awk ' BEGIN { OFS = "\t"; print "sex","tag","name","morph","fo","fs","fi","si","fsi","colour" }; { if ($$3 == "f") { fo = 1; fs = 1; fi = 1; m = 2; si = "NA"; col = "tomato3" } if ($$3 == "s") { fo = 0; fs = 0; fi = "NA"; m = 1; si = 1; col = "steelblue" } if ($$3 == "i") { fo = 0; fs = "NA"; fi = 0; m = 0; si = 0; col = "goldenrod" } print "1",$$2,$$1,$$3,fo,fs,fi,si,m,col } ' > $@
+
+
+$(GEN2)tag_info.txt:	$(GEN2)tag_info1.txt $(GEN2)tag_info2.txt
+	cat $^ | sort | awk ' BEGIN { print "lib" }; { print $$2 } ' > $@
+
+
+$(GEN2)tag_info1.txt:	$(PRO)barcodes/2014025_TBLib1.pools
+	awk -F"\t" ' BEGIN { OFS="\t" }; { print $$2,"0" } ' $^ > $@
+
+
+$(GEN2)tag_info2.txt:	$(PRO)barcodes/2014025_TBLib2.pools
+	awk -F"\t" ' BEGIN { OFS="\t" }; { print $$2,"1" } ' $^ > $@
+
+######
+
+
 .PHONY:	new-create-raw
 new-create-raw:	$(GEN2)raw_RUFFv0.2_dp6.ped $(GEN2)RUFFv0.2_dp6.tped $(GEN2)RUFFv0.2_dp6.raw
 
