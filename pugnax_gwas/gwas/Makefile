@@ -755,21 +755,21 @@ refnam2 = $(subst .fa,,$(ref2))
 
 ###### ######
 
-GEN-IN2 = $(addprefix $(GEN2)bm_,$(refnam2))
+GEN-IN2 = $(addprefix $(GEN2),$(refnam2))
 
 phe-in2 = $(subst $(GEN2),$(GEN2)phe_,$(GEN-IN2))
 PHE-IN2 = $(addsuffix .txt,$(phe-in2))
 
 
 .PHONY:	new-create-phe
-new-create-phe:	$(PHE-IN2) $(GEN2)phe_bm_RUFFv0.2.txt
+new-create-phe:	$(PHE-IN2) $(GEN2)phe_RUFFv0.2.txt
 
 
 $(GEN2)phe_%.txt:	$(GEN2)phe_bamids_%.txt $(GEN2)phe_base.txt $(GEN2)tag_info.txt
 	paste $^ > $@
 
 
-$(GEN2)phe_bamids_%.txt:	$(ALN)%.vcf.gz
+$(GEN2)phe_bamids_%.txt:	$(ALN)var_%.vcf.gz
 	zcat $^ | grep "#CHROM" | awk ' { for (i=10; i<=NF; i++) print $$i } ' | sort | awk ' BEGIN { print "id" }; { print $$0 } ' > $@
 
 
