@@ -775,6 +775,12 @@ $(GEN2)RUFFv0.2_dp6_cmdf.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 $(GEN2)RUFFv0.2_dp6_cmd_pc5.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript mdscale_filt.r $^ $@
 
+$(GEN2)RUFFv0.2_dp6_cmd_pc25.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript mdscale_perid0.25.r $^ $@
+
+$(GEN2)RUFFv0.2_dp6_cmd_pc1.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript mdscale_perid0.1.r $^ $@
+
 ######
 
 .PHONY:	new-create-phe
