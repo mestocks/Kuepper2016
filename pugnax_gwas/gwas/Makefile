@@ -760,6 +760,16 @@ GEN-IN2 = $(addprefix $(GEN2),$(refnam2))
 phe-in2 = $(subst $(GEN2),$(GEN2)phe_,$(GEN-IN2))
 PHE-IN2 = $(addsuffix .txt,$(phe-in2))
 
+#$(GEN2)RUFFv0.2_dp6.raw
+#CMD = $(addsuffix _cmd.png,$(GEN-VER))
+
+.PHONY:	new-mds
+new-mds:	$(GEN2)RUFFv0.2_dp6_cmd.png
+
+$(GEN2)RUFFv0.2_dp6_cmd.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript mdscale.r $^ $@
+
+######
 
 .PHONY:	new-create-phe
 new-create-phe:	$(PHE-IN2) $(GEN2)phe_RUFFv0.2.txt
