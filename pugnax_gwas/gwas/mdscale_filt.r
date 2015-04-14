@@ -7,7 +7,7 @@ gen.in <- args[1]
 phe.in <- args[2]
 man.out <- args[3]
 
-ruff <- load_and_qc(phe.in, gen.in, maf = 0, call = 0)
+ruff <- load_and_qc(phe.in, gen.in, maf = 0, call = 0, perid.call = 0.5)
 #ruff <- load.gwaa.data(phe = phe.in, gen = gen.in, force = T)
 
 ruff.gkin <- ibs(ruff, weight = "freq")

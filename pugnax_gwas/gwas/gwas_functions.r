@@ -1,7 +1,7 @@
 load_and_qc <- function(phe, gen,
                         qc = TRUE,
                         maf = 0.05,
-                        call = 0.9) {
+                        call = 0.9, perid.call = 0) {
 
   data <- load.gwaa.data(phe = phe, gen = gen, force = T)
 	
