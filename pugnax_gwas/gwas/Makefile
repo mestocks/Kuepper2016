@@ -755,6 +755,17 @@ refnam2 = $(subst .fa,,$(ref2))
 
 ###### ######
 
+.PHONY:	new-qtscore
+new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt
+
+$(GEN2)fo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)ufo_qt1_RUFFv0.2_dp6.txt
+	awk ' BEGIN { OFS = "\t"; a=0; l=0; c="" }; { if ($$0 ~ "Chromosome") print $$0,"GenomePosition"; else { if ($$1 != c) a+=l; print $$0,$$2+a; l=$$2; c=$$1 } } ' $^ > $@
+
+$(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ fo 1 FALSE
+
+###### ######
+
 GEN-IN2 = $(addprefix $(GEN2),$(refnam2))
 
 phe-in2 = $(subst $(GEN2),$(GEN2)phe_,$(GEN-IN2))
