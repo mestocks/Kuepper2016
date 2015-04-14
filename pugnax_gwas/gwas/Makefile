@@ -764,10 +764,13 @@ PHE-IN2 = $(addsuffix .txt,$(phe-in2))
 #CMD = $(addsuffix _cmd.png,$(GEN-VER))
 
 .PHONY:	new-mds
-new-mds:	$(GEN2)RUFFv0.2_dp6_cmd.png
+new-mds:	$(GEN2)RUFFv0.2_dp6_cmd.png $(GEN2)RUFFv0.2_dp6_cmdf.png
 
 $(GEN2)RUFFv0.2_dp6_cmd.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript mdscale.r $^ $@
+
+$(GEN2)RUFFv0.2_dp6_cmdf.png:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript mdscale_filt.r $^ $@
 
 ######
 
