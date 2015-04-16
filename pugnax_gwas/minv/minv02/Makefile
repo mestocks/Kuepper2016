@@ -22,8 +22,8 @@ sam = $(addsuffix .sam,$(SEQ))
 bam = $(addsuffix .bam,$(SEQ))
 bed = $(addsuffix .bed,$(SEQ))
 
-sp3357 = $(addprefix sp_contig3357_,$(sam))
-sp1270 = $(addprefix sp_contig1270_,$(sam))
+sp3357 = $(addprefix $(IMAP)sp_contig3357_,$(sam))
+sp1270 = $(addprefix $(IMAP)sp_contig1270_,$(sam))
 
 txt = $(addsuffix .txt,$(SEQ))
 
