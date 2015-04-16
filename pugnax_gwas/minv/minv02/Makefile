@@ -22,6 +22,9 @@ sam = $(addsuffix .sam,$(SEQ))
 bam = $(addsuffix .bam,$(SEQ))
 bed = $(addsuffix .bed,$(SEQ))
 
+sp3357 = $(addprefix sp3357_1270_,$(sam))
+sp1270 = $(addprefix sp1270_3357_,$(sam))
+
 txt = $(addsuffix .txt,$(SEQ))
 
 raw-bam = $(addprefix $(MAP),$(bam))
