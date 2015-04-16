@@ -22,6 +22,9 @@ sam = $(addsuffix .sam,$(SEQ))
 bam = $(addsuffix .bam,$(SEQ))
 bed = $(addsuffix .bed,$(SEQ))
 
+sp3357 = $(addprefix sp_contig3357_,$(sam))
+sp1270 = $(addprefix sp_contig1270_,$(sam))
+
 txt = $(addsuffix .txt,$(SEQ))
 
 raw-bam = $(addprefix $(MAP),$(bam))
@@ -154,6 +157,15 @@ $(IMAP)rr_contig3357_%.sam:	$(IMAP)rr_%.bam
 $(IMAP)rr_contig1270_%.sam:	$(IMAP)rr_%.bam
 	samtools view $^ $(c1270) > $@
 
+
+.PHONY: localalign
+localalign:	$(sp3357) $(sp1270)
+
+$(IMAP)sp_contig3357%.sam:	$(IMAP)pp_contig3357%.sam
+	grep "Contig1270" $^ > $@
+
+$(IMAP)sp_contig1270%.sam:	$(IMAP)pp_contig1270%.sam
+	grep "Contig3357" $^ > $@
 
 
 .PHONY:	coi
