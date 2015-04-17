@@ -119,130 +119,130 @@ dxy%_1k_1_sl.txt:	dxy%.txt
 nalleles17:	$(dxycoi17)
 
 dxy17_F_SI_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 dxy17_F_SI_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_SI wgs17 > $@
+	cat $^ | dxy F_SI wgs17 > $@
 
 ##
 
 dxy17_F_S_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 dxy17_F_S_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_S wgs17 > $@
+	cat $^ | dxy F_S wgs17 > $@
 
 ##
 
 dxy17_F_I_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 dxy17_F_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py F_I wgs17 > $@
+	cat $^ | dxy F_I wgs17 > $@
 
 ##
 
 dxy17_S_I_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 dxy17_S_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
-	cat $^ | python ~/lib/Evolib/dxy.py S_I wgs17 > $@
+	cat $^ | dxy S_I wgs17 > $@
 
 ##
 
@@ -265,16 +265,16 @@ dxyF_SI_%.txt:	dxyF_SI.txt.gz
 ##
 
 dxyF_I.txt.gz:	inv.vcf
-	cat $^ | python /home/mist/repos/Evolib/dxy.py F_I | gzip > $@
+	cat $^ | dxy F_I | gzip > $@
 
 dxyF_S.txt.gz:	inv.vcf
-	cat $^ | python /home/mist/repos/Evolib/dxy.py F_S | gzip > $@
+	cat $^ | dxy F_S | gzip > $@
 
 dxyS_I.txt.gz:	inv.vcf
-	cat $^ | python /home/mist/repos/Evolib/dxy.py S_I | gzip > $@
+	cat $^ | dxy S_I | gzip > $@
 
 dxyF_SI.txt.gz:	inv.vcf
-	cat $^ | python /home/mist/repos/Evolib/dxy.py F_SI | gzip > $@
+	cat $^ | dxy F_SI | gzip > $@
 
 ##
 
