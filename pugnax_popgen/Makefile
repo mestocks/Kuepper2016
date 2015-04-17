@@ -96,22 +96,22 @@ dxywin%_1k_1.txt:	dxy%.txt dxy%_1k_1_sl.txt
 ##
 
 dxy%_50k_5k_sl.txt:	dxy%.txt
-	cat $^ | /home/mist/repos/slide/bin/slmean -k 7 -w 50000 -s 5000 > $@
+	cat $^ | slmean -k 7 -w 50000 -s 5000 > $@
 
 dxy%_20k_2k_sl.txt:	dxy%.txt
-	cat $^ | /home/mist/repos/slide/bin/slmean -k 7 -w 20000 -s 2000 > $@
+	cat $^ | slmean -k 7 -w 20000 -s 2000 > $@
 
 dxy%_20k_1k_sl.txt:	dxy%.txt
-	cat $^ | /home/mist/repos/slide/bin/slmean -k 7 -w 20000 -s 1000 > $@
+	cat $^ | slmean -k 7 -w 20000 -s 1000 > $@
 
 dxy%_10k_1k_sl.txt:	dxy%.txt
-	cat $^ | /home/mist/repos/slide/bin/slmean -k 7 -w 10000 -s 1000 > $@
+	cat $^ | slmean -k 7 -w 10000 -s 1000 > $@
 
 dxy%_5k_500_sl.txt:	dxy%.txt
-	cat $^ | /home/mist/repos/slide/bin/slmean -k 7 -w 5000 -s 500 > $@
+	cat $^ | slmean -k 7 -w 5000 -s 500 > $@
 
 dxy%_1k_1_sl.txt:	dxy%.txt
-	cat $^ | /home/mist/repos/slide/bin/slmean -k 7 -w 1000 -s 1 > $@
+	cat $^ | slmean -k 7 -w 1000 -s 1 > $@
 
 ##
 
