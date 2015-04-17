@@ -265,16 +265,16 @@ dxyF_SI_%.txt:	dxyF_SI.txt.gz
 ##
 
 dxyF_I.txt.gz:	inv.vcf
-	cat $^ | dxy F_I | gzip > $@
+	cat $^ | dxy F_I wgs5 | gzip > $@
 
 dxyF_S.txt.gz:	inv.vcf
-	cat $^ | dxy F_S | gzip > $@
+	cat $^ | dxy F_S wgs5 | gzip > $@
 
 dxyS_I.txt.gz:	inv.vcf
-	cat $^ | dxy S_I | gzip > $@
+	cat $^ | dxy S_I wgs5 | gzip > $@
 
 dxyF_SI.txt.gz:	inv.vcf
-	cat $^ | dxy F_SI | gzip > $@
+	cat $^ | dxy F_SI wgs5 | gzip > $@
 
 ##
 
