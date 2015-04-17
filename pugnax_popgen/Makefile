@@ -2,6 +2,8 @@
 lwin = 10000
 step = 1000
 
+PG = pg01/
+
 slpar = -w $(lwin) -s $(step)
 coi = 1270 2063 3047 3208 3357 3750 3913 4111 4944 9013
 
@@ -35,8 +37,8 @@ inv%_depth.txt:	inv_depth.txt.gz
 
 ###### ######
 
-dxygz = dxyF_I.txt.gz dxyF_S.txt.gz dxyS_I.txt.gz dxyF_SI.txt.gz
-dxygz17 = dxy17_F_I.txt.gz dxy17_F_S.txt.gz dxy17_S_I.txt.gz dxy17_F_SI.txt.gz
+dxygz = $(PG)dxyF_I.txt.gz $(PG)dxyF_S.txt.gz $(PG)dxyS_I.txt.gz $(PG)dxyF_SI.txt.gz
+dxygz17 = $(PG)dxy17_F_I.txt.gz $(PG)dxy17_F_S.txt.gz $(PG)dxy17_S_I.txt.gz $(PG)dxy17_F_SI.txt.gz
 
 # dxyF_I.txt.gz -> dxyF_I_1270.txt dxyF_I_2063.txt... 
 dxycoi = $(foreach d,$(coi),$(subst .txt.gz,_$(d).txt,$(dxygz)))
@@ -68,49 +70,49 @@ dxywindows = $(dxy50k5k) $(dxy20k2k) $(dxy20k1k) $(dxy10k1k) $(dxy5k500) $(dxy1k
 .PHONY:	dxy
 dxy:	$(dxywindows)
 
-dxywin%_50k_5k.txt:	dxy%.txt dxy%_50k_5k_sl.txt
-	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 5000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > dxy$*_50k_5k_pos.txt
-	paste -d" " dxy$*_50k_5k_pos.txt $(word 2,$^) > $@
+$(PG)dxywin%_50k_5k.txt:	$(PG)dxy%.txt $(PG)dxy%_50k_5k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 5000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_50k_5k_pos.txt
+	paste -d" " $(PG)dxy$*_50k_5k_pos.txt $(word 2,$^) > $@
 
-dxywin%_20k_2k.txt:	dxy%.txt dxy%_20k_2k_sl.txt
-	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 20000) { s++; if (s == 2000) { s = 0; print $$2 - (20000 / 2) } } } ' $(word 1,$^) > dxy$*_20k_2k_pos.txt
-	paste -d" " dxy$*_20k_2k_pos.txt $(word 2,$^) > $@
+$(PG)dxywin%_20k_2k.txt:	$(PG)dxy%.txt $(PG)dxy%_20k_2k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 20000) { s++; if (s == 2000) { s = 0; print $$2 - (20000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_20k_2k_pos.txt
+	paste -d" " $(PG)dxy$*_20k_2k_pos.txt $(word 2,$^) > $@
 
-dxywin%_20k_1k.txt:	dxy%.txt dxy%_20k_1k_sl.txt
-	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 20000) { s++; if (s == 1000) { s = 0; print $$2 - (20000 / 2) } } } ' $(word 1,$^) > dxy$*_20k_1k_pos.txt
-	paste -d" " dxy$*_20k_1k_pos.txt $(word 2,$^) > $@
+$(PG)dxywin%_20k_1k.txt:	$(PG)dxy%.txt $(PG)dxy%_20k_1k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 20000) { s++; if (s == 1000) { s = 0; print $$2 - (20000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_20k_1k_pos.txt
+	paste -d" " $(PG)dxy$*_20k_1k_pos.txt $(word 2,$^) > $@
 
-dxywin%_10k_1k.txt:	dxy%.txt dxy%_10k_1k_sl.txt
-	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 10000) { s++; if (s == 1000) { s = 0; print $$2 - (10000 / 2) } } } ' $(word 1,$^) > dxy$*_10k_1k_pos.txt
-	paste -d" " dxy$*_10k_1k_pos.txt $(word 2,$^) > $@
+$(PG)dxywin%_10k_1k.txt:	$(PG)dxy%.txt $(PG)dxy%_10k_1k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 10000) { s++; if (s == 1000) { s = 0; print $$2 - (10000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_10k_1k_pos.txt
+	paste -d" " $(PG)dxy$*_10k_1k_pos.txt $(word 2,$^) > $@
 
-dxywin%_5k_500.txt:	dxy%.txt dxy%_5k_500_sl.txt
-	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > dxy$*_5k_500_pos.txt
-	paste -d" " dxy$*_5k_500_pos.txt $(word 2,$^) > $@
+$(PG)dxywin%_5k_500.txt:	$(PG)dxy%.txt $(PG)dxy%_5k_500_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_5k_500_pos.txt
+	paste -d" " $(PG)dxy$*_5k_500_pos.txt $(word 2,$^) > $@
 
-dxywin%_1k_1.txt:	dxy%.txt dxy%_1k_1_sl.txt
-	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 1000) { s++; if (s == 1) { s = 0; print $$2 - (1000 / 2) } } } ' $(word 1,$^) > dxy$*_1k_1_pos.txt
-	paste -d" " dxy$*_1k_1_pos.txt $(word 2,$^) > $@
+$(PG)dxywin%_1k_1.txt:	$(PG)dxy%.txt $(PG)dxy%_1k_1_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 1000) { s++; if (s == 1) { s = 0; print $$2 - (1000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_1k_1_pos.txt
+	paste -d" " $(PG)dxy$*_1k_1_pos.txt $(word 2,$^) > $@
 
 
 ##
 
-dxy%_50k_5k_sl.txt:	dxy%.txt
+$(PG)dxy%_50k_5k_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 50000 -s 5000 > $@
 
-dxy%_20k_2k_sl.txt:	dxy%.txt
+$(PG)dxy%_20k_2k_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 20000 -s 2000 > $@
 
-dxy%_20k_1k_sl.txt:	dxy%.txt
+$(PG)dxy%_20k_1k_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 20000 -s 1000 > $@
 
-dxy%_10k_1k_sl.txt:	dxy%.txt
+$(PG)dxy%_10k_1k_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 10000 -s 1000 > $@
 
-dxy%_5k_500_sl.txt:	dxy%.txt
+$(PG)dxy%_5k_500_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 5000 -s 500 > $@
 
-dxy%_1k_1_sl.txt:	dxy%.txt
+$(PG)dxy%_1k_1_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 1000 -s 1 > $@
 
 ##
@@ -118,130 +120,130 @@ dxy%_1k_1_sl.txt:	dxy%.txt
 .PHONY:	nalleles17
 nalleles17:	$(dxycoi17)
 
-dxy17_F_SI_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
+$(PG)dxy17_F_SI_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
+$(PG)dxy17_F_SI_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
+$(PG)dxy17_F_SI_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
+$(PG)dxy17_F_SI_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
+$(PG)dxy17_F_SI_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
+$(PG)dxy17_F_SI_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
+$(PG)dxy17_F_SI_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
+$(PG)dxy17_F_SI_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
+$(PG)dxy17_F_SI_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
-dxy17_F_SI_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
+$(PG)dxy17_F_SI_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
 	cat $^ | dxy F_SI wgs17 > $@
 
 ##
 
-dxy17_F_S_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
+$(PG)dxy17_F_S_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
+$(PG)dxy17_F_S_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
+$(PG)dxy17_F_S_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
+$(PG)dxy17_F_S_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
+$(PG)dxy17_F_S_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
+$(PG)dxy17_F_S_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
+$(PG)dxy17_F_S_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
+$(PG)dxy17_F_S_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
+$(PG)dxy17_F_S_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
-dxy17_F_S_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
+$(PG)dxy17_F_S_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
 	cat $^ | dxy F_S wgs17 > $@
 
 ##
 
-dxy17_F_I_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
+$(PG)dxy17_F_I_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
+$(PG)dxy17_F_I_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
+$(PG)dxy17_F_I_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
+$(PG)dxy17_F_I_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
+$(PG)dxy17_F_I_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
+$(PG)dxy17_F_I_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
+$(PG)dxy17_F_I_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
+$(PG)dxy17_F_I_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
+$(PG)dxy17_F_I_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
-dxy17_F_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
+$(PG)dxy17_F_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
 	cat $^ | dxy F_I wgs17 > $@
 
 ##
 
-dxy17_S_I_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
+$(PG)dxy17_S_I_1270.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig1270_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
+$(PG)dxy17_S_I_2063.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig2063_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
+$(PG)dxy17_S_I_3047.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3047_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
+$(PG)dxy17_S_I_3208.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3208_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
+$(PG)dxy17_S_I_3357.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3357_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
+$(PG)dxy17_S_I_3750.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3750_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
+$(PG)dxy17_S_I_3913.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig3913_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
+$(PG)dxy17_S_I_4111.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4111_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
+$(PG)dxy17_S_I_4944.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig4944_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
-dxy17_S_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
+$(PG)dxy17_S_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013_nv_raw.vcf
 	cat $^ | dxy S_I wgs17 > $@
 
 ##
@@ -249,31 +251,31 @@ dxy17_S_I_9013.txt:	~/shared/ruff/illumina_high/snps_wgs17/17_samples_contig9013
 .PHONY:	nalleles
 nalleles:	$(dxycoi) $(dxygz)
 
-dxyF_I_%.txt:	dxyF_I.txt.gz
+$(PG)dxyF_I_%.txt:	$(PG)dxyF_I.txt.gz
 	zcat $^ | grep "Contig$*" > $@
 
-dxyF_S_%.txt:	dxyF_S.txt.gz
+$(PG)dxyF_S_%.txt:	$(PG)dxyF_S.txt.gz
 	zcat $^ | grep "Contig$*" > $@
 
-dxyS_I_%.txt:	dxyS_I.txt.gz
+$(PG)dxyS_I_%.txt:	$(PG)dxyS_I.txt.gz
 	zcat $^ | grep "Contig$*" > $@
 
-dxyF_SI_%.txt:	dxyF_SI.txt.gz
+$(PG)dxyF_SI_%.txt:	$(PG)dxyF_SI.txt.gz
 	zcat $^ | grep "Contig$*" > $@
 
 
 ##
 
-dxyF_I.txt.gz:	inv.vcf
+$(PG)dxyF_I.txt.gz:	$(PG)inv.vcf
 	cat $^ | dxy F_I wgs5 | gzip > $@
 
-dxyF_S.txt.gz:	inv.vcf
+$(PG)dxyF_S.txt.gz:	$(PG)inv.vcf
 	cat $^ | dxy F_S wgs5 | gzip > $@
 
-dxyS_I.txt.gz:	inv.vcf
+$(PG)dxyS_I.txt.gz:	$(PG)inv.vcf
 	cat $^ | dxy S_I wgs5 | gzip > $@
 
-dxyF_SI.txt.gz:	inv.vcf
+$(PG)dxyF_SI.txt.gz:	$(PG)inv.vcf
 	cat $^ | dxy F_SI wgs5 | gzip > $@
 
 ##
