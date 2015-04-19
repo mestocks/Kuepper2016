@@ -762,7 +762,7 @@ $(GEN2)fo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)reord_ufo_qt1_RUFFv0.2_dp6.txt
 	awk ' BEGIN { OFS = "\t"; a=0; l=0; c=""; print "Chromosome","Position","P1df","chrID","GenomePosition" }; { if ($$1 != c) a+=l; print $$0,$$2+a; l=$$2; c=$$1 } ' $^ > $@
 
 $(GEN2)reord_ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)ufo_qt1_RUFFv0.2_dp6.txt
-	grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; coi=4999 }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { coi++; c=coi; old_chr = $$1 } else { a++; if (a == 5000) a=5010; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4,4n -k 2,2n > $@
+	grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; coi=1269 }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { coi++; c=coi; old_chr = $$1 } else { a++; if (a == 1270) a=1280; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4,4n -k 2,2n > $@
 
 $(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ fo 1 FALSE
