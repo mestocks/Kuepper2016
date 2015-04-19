@@ -758,8 +758,11 @@ refnam2 = $(subst .fa,,$(ref2))
 .PHONY:	new-qtscore
 new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt
 
-$(GEN2)fo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)ufo_qt1_RUFFv0.2_dp6.txt
+$(GEN2)fo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)reord_ufo_qt1_RUFFv0.2_dp6.txt
 	awk ' BEGIN { OFS = "\t"; a=0; l=0; c="" }; { if ($$0 ~ "Chromosome") print $$0,"GenomePosition"; else { if ($$1 != c) a+=l; print $$0,$$2+a; l=$$2; c=$$1 } } ' $^ > $@
+
+$(GEN2)reord_ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)ufo_qt1_RUFFv0.2_dp6.txt
+	grep "^Chromosome" -v $^ | awk ' BEGIN { print "Chromosome", ""Position", "P1df", "chrID"; a=0; old_chr=-1; coi=4999 }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { coi++; c=coi; old_chr = $$1 } else { a++; if (a == 5000) a=5010; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4n > $@
 
 $(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ fo 1 FALSE
@@ -773,6 +776,8 @@ PHE-IN2 = $(addsuffix .txt,$(phe-in2))
 
 #$(GEN2)RUFFv0.2_dp6.raw
 #CMD = $(addsuffix _cmd.png,$(GEN-VER))
+
+#grep "^Chromosome" -v fo_qt1_RUFFv0.2_dp6.txt | awk ' BEGIN { print "chr", "CHR", "BP", "P"; a=0; old_chr=-1; coi=4999 }; { if ($1 != old_chr) { if ($1 == 1270 || $1 == 2063 || $1 == 3047 || $1 == 3208 || $1 == 3357 || $1 == 3750 || $1 == 3913 || $1 == 4111 || $1 == 4944 || $1 == 9013) { coi++; c=coi; old_chr = $1 } else { a++; if (a == 5000) a=5010; c=a; old_chr = $1 } } print $1,c,$2,$3 } ' | sort -k 2n | awk ' { if ($2 == "CHR" || $2 > 4000 && $2 < 6000) print $0 } ' > sub_reord_fo_qt1_RUFFv0.2_dp6.txt
 
 .PHONY:	new-mds
 new-mds:	$(GEN2)RUFFv0.2_dp6_cmd.png $(GEN2)RUFFv0.2_dp6_cmdf.png $(GEN2)RUFFv0.2_dp6_cmd_pc25.png $(GEN2)RUFFv0.2_dp6_cmd_pc1.png
