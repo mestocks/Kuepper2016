@@ -10,7 +10,7 @@ slpar = -w $(lwin) -s $(step)
 coi = 1270 2063 3047 3208 3357 3750 3913 4111 4944 9013
 phased = MB8684ht MB8685ht MB8686ht MB8687ht MB8688ht
 
-pcoi = $(addprefix "Contig",$(coi))
+pcoi = $(addprefix Contig,$(coi))
 phoi = $(foreach p,$(phased),$(addsuffix $(p),$(pcoi)))
 
 cdsbed = $(addsuffix .bed,$(phoi))
