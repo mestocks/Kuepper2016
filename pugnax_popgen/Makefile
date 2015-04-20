@@ -42,12 +42,8 @@ cds-by-gene:
 .PHONY:	cds-ann
 cds-ann:	$(CDSBED)
 
-#$(PG)ugenes.txt:	$(CDSBED)
-#	cat $^ | awk -F"\t" ' { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1]"_"b[2] } ' | sort | uniq > $@
-
-
 $(PG)Contig%.bed:	$(AA)Contig%.fasta.gff
-	grep "^#" -v $^ | grep "CDS" | awk -F"\t" ' BEGIN { OFS="\t" }; { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1],$$4,$$5,a[1]"_"a[2]"_"b[2]"_"cds"_"$$4"_"$$5,$$6,$$7 } '> $@
+	grep "^#" -v $^ | grep "CDS" | awk -F"\t" ' BEGIN { OFS="\t" }; { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1],$$4,$$5,a[1]"_"a[2]"_"b[2]"_cds_"$$4"_"$$5,$$6,$$7 } '> $@
 
 ###### ######
 
