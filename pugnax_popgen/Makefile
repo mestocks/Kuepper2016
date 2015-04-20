@@ -35,11 +35,11 @@ FTAB = $(subst .bed,.ftab,$(CDSBED))
 UTAB = $(addsuffix .fa,$(ugenes))
 
 .PHONY:	cds-by-gene
-cds-by-gene:	$(FTAB) #$(UTAB)
+cds-by-gene:	$(FTAB) $(UTAB)
 
 # chr_geneid
-#$(PG)%.fa:	$(PG)%*.ftab
-#	grep "$*"
+$(PG)%.fa:	$(FTAB)
+	cat $^ | grep "$*" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
 
 # get fasta, concatenate cds regions, and allow greping by "chr_geneid"
 $(PG)%ht.ftab:	$(SH)%ht.fasta $(PG)%ht.bed
