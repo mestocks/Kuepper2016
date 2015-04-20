@@ -3,9 +3,18 @@ lwin = 10000
 step = 1000
 
 PG = pg01/
+SH = /shared/Molecol/NBAF/ruff/diag/phasing/
+AA = $(SH)aa/
 
 slpar = -w $(lwin) -s $(step)
 coi = 1270 2063 3047 3208 3357 3750 3913 4111 4944 9013
+phased = MB8684ht MB8685ht MB8686ht MB8687ht MB8688ht
+
+pcoi = $(addprefix "Contig",$(coi))
+phoi = $(foreach p,$(phased),$(addsuffix $(p),$(pcoi)))
+
+cdsbed = $(addsuffix .bed,$(phoi))
+
 
 covcoi = $(addprefix cov,$(coi))
 #dxycoi = $(addprefix dxy,$(coi))
@@ -17,6 +26,15 @@ cov-slpos = $(addsuffix _sl_pos,$(covcoi))
 all-cov = $(cov-sl) $(cov-slpos)
 COV = $(addsuffix .txt,$(all-cov))
 
+###### ######
+
+CDSBED = $(addprefix $(PG),$(cdsbed))
+
+.PHONY:	cds-ann
+cds-ann:	$(CDSBED)
+
+$(PG)Contig%.bed:	$(AA)Contig%.fasta.gff
+	grep "^#" -v $^ | grep "CDS" > $@
 
 ###### ######
 
