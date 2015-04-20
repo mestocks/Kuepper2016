@@ -34,7 +34,7 @@ CDSBED = $(addprefix $(PG),$(cdsbed))
 cds-ann:	$(CDSBED)
 
 $(PG)Contig%.bed:	$(AA)Contig%.fasta.gff
-	grep "^#" -v $^ | grep "CDS" > $@
+	grep "^#" -v $^ | grep "CDS" | awk -F"\t" ' BEGIN { OFS="\t" }; { print $$1,$$4,$$5,$$2,$$3,$$6,$$7,$$8,$$9 } '> $@
 
 ###### ######
 
