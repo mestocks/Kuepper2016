@@ -766,7 +766,7 @@ $(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)u%_qt1_RUFFv0.2_dp6.txt
 #	grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; coi=1269 }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { coi++; c=coi; old_chr = $$1 } else { a++; if (a == 1270) a=1280; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4,4n -k 2,2n > $@
 
 $(GEN2)contigsize.txt:	$(ALN)var_RUFFv0.2.vcf.gz
-zcat $^ | grep "#contig=<ID=Contig" | awk '{ gsub("##contig=<ID=Contig","",$$0); gsub("length=","",$$0); gsub(">","",$$0); split($$0,a,","); print a[1],a[2] } ' > $@
+	zcat $^ | grep "#contig=<ID=Contig" | awk '{ gsub("##contig=<ID=Contig","",$$0); gsub("length=","",$$0); gsub(">","",$$0); split($$0,a,","); print a[1],a[2] } ' > $@
 
 $(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ fo 1 FALSE
