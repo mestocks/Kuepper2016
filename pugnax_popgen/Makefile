@@ -32,10 +32,10 @@ CDSBED = $(addprefix $(PG),$(cdsbed))
 # Contig1270_g2
 ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
 FTAB = $(subst .bed,.ftab,$(CDSBED))
-UTAB = $(addsuffix .fa,$(ugenes))
+UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
 
 .PHONY:	cds-by-gene
-cds-by-gene:	$(FTAB) $(UTAB)
+cds-by-gene:	$(FTAB) $(UFA)
 
 # chr_geneid
 $(PG)%.fa:	$(FTAB)
