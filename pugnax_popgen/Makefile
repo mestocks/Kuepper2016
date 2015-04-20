@@ -29,15 +29,21 @@ COV = $(addsuffix .txt,$(all-cov))
 ###### ######
 
 CDSBED = $(addprefix $(PG),$(cdsbed))
-# Contig1270_
+# Contig1270_g2
 ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1]"_"b[2] } ' | sort | uniq)
-
-
+FTAB = $(subst .bed,.ftab,$(CDSBED))
+UTAB = $(addsuffix .fa,$(ugenes))
 
 .PHONY:	cds-by-gene
-cds-by-gene:
+cds-by-gene:	$(FTAB) #$(UTAB)
 
+# chr_geneid
+#$(PG)%.fa:	$(PG)%*.ftab
+#	grep "$*"
 
+# get fasta, concatenate cds regions, and allow greping by "chr_geneid"
+$(PG)%ht.ftab:	$(SH)%ht.fasta $(PG)%ht.bed
+	bedtools getfasta -tab -name -s -fi $(word 1,$^) -bed $(word 2,$^) -fo - | awk -F"\t" ' { split($$1,a,"_"); A[a[1]"_"a[3]"_"a[2]]=A[a[1]"_"a[3]"_"a[2]]$$2 }; END { for (i in A) print i"\t"A[i] } ' > $@
 
 .PHONY:	cds-ann
 cds-ann:	$(CDSBED)
