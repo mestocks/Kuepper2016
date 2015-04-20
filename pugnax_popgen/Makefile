@@ -30,8 +30,15 @@ COV = $(addsuffix .txt,$(all-cov))
 
 CDSBED = $(addprefix $(PG),$(cdsbed))
 
+#.PHONY:	cds-by-gene
+#cds-by-gene:	
+
 .PHONY:	cds-ann
 cds-ann:	$(CDSBED)
+
+$(PG)ugenes.txt:	$(CDSBED)
+	cat $^ | awk -F"\t" ' { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1]"_"b[2] } ' | sort | uniq > $@
+
 
 $(PG)Contig%.bed:	$(AA)Contig%.fasta.gff
 	grep "^#" -v $^ | grep "CDS" | awk -F"\t" ' BEGIN { OFS="\t" }; { print $$1,$$4,$$5,$$2,$$3,$$6,$$7,$$8,$$9 } '> $@
