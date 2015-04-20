@@ -30,7 +30,7 @@ COV = $(addsuffix .txt,$(all-cov))
 
 CDSBED = $(addprefix $(PG),$(cdsbed))
 # Contig1270_g2
-ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1]"_"b[2] } ' | sort | uniq)
+ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
 FTAB = $(subst .bed,.ftab,$(CDSBED))
 UTAB = $(addsuffix .fa,$(ugenes))
 
