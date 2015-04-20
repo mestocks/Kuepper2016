@@ -34,7 +34,7 @@ CDSBED = $(addprefix $(PG),$(cdsbed))
 #cds-by-gene:	
 
 .PHONY:	cds-ann
-cds-ann:	$(CDSBED)
+cds-ann:	$(CDSBED) $(PG)ugenes.txt
 
 $(PG)ugenes.txt:	$(CDSBED)
 	cat $^ | awk -F"\t" ' { split($$1,a,"_"); split($$9,b,";"); gsub(" gene_id ","",b[2]); gsub(/"/,"",b[2]); print a[1]"_"b[2] } ' | sort | uniq > $@
