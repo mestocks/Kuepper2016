@@ -756,14 +756,17 @@ refnam2 = $(subst .fa,,$(ref2))
 ###### ######
 
 .PHONY:	new-qtscore
-new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt
+new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt
 
-$(GEN2)%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt
-	awk ' BEGIN { OFS = "\t"; a=0; c=0; LEN[0]=0; LEN[1270]=848140; LEN[1707]=593636; LEN[1708]=377408; LEN[1709]=942; LEN[1711]=505941; LEN[1713]=346678; LEN[1714]=19445; LEN[1715]=288965; LEN[1716]=50947; LEN[1717]=45719; LEN[1718]=657848; LEN[1719]=754771; LEN[1721]=189897; LEN[1722]=122307; LEN[1723]=11038; LEN[1726]=1577643; LEN[2063]=881023; LEN[3047]=964776; LEN[3208]=577021; LEN[3357]=914367; LEN[3750]=112104; LEN[3913]=575835; LEN[4111]=258429; LEN[4944]=31580; LEN[9013]=146468; print "Chromosome","Position","P1df","chrID","GenomePosition" }; { if ($$1 != c) a+=LEN[c]; print $$0,$$2+a; c=$$1 } ' $^ > $@
+$(GEN2)%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)contigsize.txt $(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt
+	awk ' BEGIN { OFS = "\t"; a=0; c=-1; LEN[-1]=0 }; NR==FNR { LEN[$$1]==$$2; next}; { print "Chromosome","Position","P1df","chrID","GenomePosition" }; { if ($$1 != c) a+=LEN[c]; print $$0,$$2+a; c=$$1 } ' $(word 1,$^) $(word 2,$^) > $@
 
 $(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)u%_qt1_RUFFv0.2_dp6.txt
 		grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; COI[3357]=1270; COI[3047]=1271; COI[3208]=1272; COI[4111]=1273; COI[3750]=1274; COI[2063]=1275;COI[1270]=1276;COI[4944]=1277;COI[9013]=1278;COI[3913]=1279; }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { c=COI[$$1]; old_chr = $$1 } else { a++; if (a == 1270) a=1280; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4,4n -k 2,2n > $@	
 #	grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; coi=1269 }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { coi++; c=coi; old_chr = $$1 } else { a++; if (a == 1270) a=1280; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4,4n -k 2,2n > $@
+
+$(GEN2)contigsize.txt:	$(ALN)var_RUFFv0.2.vcf.gz
+zcat $^ | grep "#contig=<ID=Contig" | awk '{ gsub("##contig=<ID=Contig","",$$0); gsub("length=","",$$0); gsub(">","",$$0); split($$0,a,","); print a[1],a[2] } ' > $@
 
 $(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ fo 1 FALSE
