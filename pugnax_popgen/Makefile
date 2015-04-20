@@ -39,7 +39,7 @@ cds-by-gene:	$(FTAB) $(UFA)
 
 # chr_geneid
 $(PG)%.fa:	$(FTAB)
-	cat $^ | grep "$*" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
+	cat $^ | grep "$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
 
 # get fasta, concatenate cds regions, and allow greping by "chr_geneid"
 $(PG)%ht.ftab:	$(SH)%ht.fasta $(PG)%ht.bed
