@@ -756,7 +756,7 @@ refnam2 = $(subst .fa,,$(ref2))
 ###### ######
 
 .PHONY:	new-qtscore
-new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt
+new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)fo_qt10k_RUFFv0.2_dp6.txt $(GEN2)si_qt10k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt
 
 $(GEN2)%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)contigsize.txt $(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt
 	awk ' BEGIN { a=0; c=-1; LEN[-1]=0; print "Chromosome","Position","P1df","chrID","GenomePosition" }; NR==FNR { LEN[$$1]=$$2; next}; { if ($$1 != c) a+=LEN[c]; print $$0,$$2+a; c=$$1 } ' $(word 1,$^) $(word 2,$^) > $@
@@ -773,6 +773,12 @@ $(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 
 $(GEN2)usif_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ si 1 FALSE
+
+$(GEN2)ufo_qt10k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ fo 10000 FALSE
+
+$(GEN2)usif_qt10k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ si 10000 FALSE
 
 ###### ######
 
