@@ -31,7 +31,7 @@ COV = $(addsuffix .txt,$(all-cov))
 CDSBED = $(addprefix $(PG),$(cdsbed))
 # Contig1270_g2
 ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
-indugenes = $(shell cat $(CDSBED) | grep "MB8684" | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[2]"_"a[3] } ' | sort | uniq)
+indugenes = $(shell cat $(CDSBED) | grep "MB8684" | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3]"_"a[2] } ' | sort | uniq)
 
 FTAB = $(subst .bed,.ftab,$(CDSBED))
 UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
