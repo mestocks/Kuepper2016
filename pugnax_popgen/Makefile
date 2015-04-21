@@ -40,14 +40,14 @@ INDTAB = $(addprefix $(PG)Contig,$(indtab))
 INDFA = $(addprefix $(PG),$(addsuffix .fa,$(indugenes)))
 
 .PHONY:	cds-by-gene
-cds-by-gene:	$(FTAB) $(UFA) $(INDTAB) $(INDFA)
+cds-by-gene:	$(FTAB) $(UFA) $(INDTAB)# $(INDFA)
 
-$(PG)%.fa:	$(INDTAB)
-	cat $^ | grep "$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
+#$(PG)%_MB8684.fa:	$(INDTAB)
+#	cat $^ | grep "$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
 
 # prepare ind fasta files. Each file is 1 gene, but with the different cds regions in separate sequences
 $(PG)%4ht_cds.ftab:	$(SH)%4ht.fasta $(PG)%4ht.bed
-	bedtools getfasta -tab -name -s -fi $(word 1,$^) -bed $(word 2,$^) -fo - > $@
+	bedtools getfasta -tab -name -s -fi $(word 1,$^) -bed $(word 2,$^) -fo - | awk -F"\t" ' { split($$1,a,"_"); gsub(a[2]"_"a[3],a[3]"_"a[2],$$1); print $$1"\t"$$2 }' > $@
 
 # chr_geneid
 $(PG)%.fa:	$(FTAB)
