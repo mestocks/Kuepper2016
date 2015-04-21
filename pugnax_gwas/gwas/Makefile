@@ -756,7 +756,7 @@ refnam2 = $(subst .fa,,$(ref2))
 ###### ######
 
 .PHONY:	new-qtscore
-new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)ufo_qt1k_RUFFv0.2_dp6.txt $(GEN2)usi_qt1k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt
+new-qtscore:	$(GEN2)fo_qt_RUFFv0.2_dp6.txt $(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)ufo_qt1k_RUFFv0.2_dp6.txt $(GEN2)usi_qt1k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt
 
 #$(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt
 #new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)ufo_qt10k_RUFFv0.2_dp6.txt $(GEN2)usi_qt10k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs10k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs10k_RUFFv0.2_dp6.txt
