@@ -38,6 +38,14 @@ UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
 indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
 INDTAB = $(addprefix $(PG)Contig,$(indtab))
 INDFA = $(addprefix $(PG)blst_,$(addsuffix .fa,$(indugenes)))
+kfa = $(subst MB8684,KILDEER,$(indugenes))
+KFA = $(addprefix $(PG),$(addsuffix .fa,$(kfa)))
+
+.PHONY:	kblast
+kblast:	$(KFA)
+
+$(PG)%_KILDEER.fa:	$(PG)blst_%_MB8684.fa
+~/ncbi-blast-2.2.29+/bin/blastn -query $^ -db assemblies/KILDEER.fa -outfmt '10 qseqid sseq' | awk -F, ' { gsub("MB8684","KILDEER",$$0); print ">"$$1"\n"$$2 } ' > $@
 
 .PHONY:	cds-by-gene
 cds-by-gene:	$(FTAB) $(UFA) $(INDTAB) $(INDFA)
