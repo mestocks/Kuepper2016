@@ -42,6 +42,14 @@ kfa = $(subst MB8684,KILDEER,$(indugenes))
 KFA = $(addprefix $(PG),$(addsuffix .fa,$(kfa)))
 KCDS = $(addprefix $(PG)cds_,$(addsuffix .fa,$(kfa)))
 
+AFA = $(subst .fa,_all.fa,$(UFA))
+
+.PNONY:	catall
+catall:	$(AFA)
+
+$(PG)Contig%_all.fa:	$(PG)cds_Contig%_KILDEER.fa $(PG)Contig%.fa
+	cat $^ | muscle > $@
+
 .PHONY:	kcat
 kcat:	$(KCDS)
 
