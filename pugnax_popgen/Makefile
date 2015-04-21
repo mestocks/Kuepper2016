@@ -50,8 +50,8 @@ $(PG)%4ht_cds.ftab:	$(SH)%4ht.fasta $(PG)%4ht.bed
 	bedtools getfasta -tab -name -s -fi $(word 1,$^) -bed $(word 2,$^) -fo - | awk -F"\t" ' { split($$1,a,"_"); gsub(a[2]"_"a[3],a[3]"_"a[2],$$1); print $$1"\t"$$2 }' > $@
 
 # chr_geneid
-$(PG)%.fa:	$(FTAB)
-	cat $^ | grep "$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
+$(PG)Contig%.fa:	$(FTAB)
+	cat $^ | grep "Contig$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
 
 # get fasta, concatenate cds regions, and allow greping by "chr_geneid"
 $(PG)%ht.ftab:	$(SH)%ht.fasta $(PG)%ht.bed
