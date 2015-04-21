@@ -37,12 +37,12 @@ FTAB = $(subst .bed,.ftab,$(CDSBED))
 UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
 indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
 INDTAB = $(addprefix $(PG)Contig,$(indtab))
-INDFA = $(addprefix $(PG),$(addsuffix _blst.fa,$(indugenes)))
+INDFA = $(addprefix $(PG)blst_,$(addsuffix _blst.fa,$(indugenes)))
 
 .PHONY:	cds-by-gene
 cds-by-gene:	$(FTAB) $(UFA) $(INDTAB) $(INDFA)
 
-$(PG)%_MB8684_blst.fa:	$(INDTAB)
+$(PG)blst_%_MB8684.fa:	$(INDTAB)
 	cat $^ | grep "$*_MB8684_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
 
 # prepare ind fasta files. Each file is 1 gene, but with the different cds regions in separate sequences
