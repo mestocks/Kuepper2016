@@ -31,13 +31,19 @@ COV = $(addsuffix .txt,$(all-cov))
 CDSBED = $(addprefix $(PG),$(cdsbed))
 # Contig1270_g2
 ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
+indugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[2]"_"a[3] } ' | sort | uniq)
+
 FTAB = $(subst .bed,.ftab,$(CDSBED))
 UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
 indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
 INDTAB = $(addprefix $(PG)Contig,$(indtab))
+INDFA = $(addprefix $(PG),$(addsuffix .fa,$(indugenes)))
 
 .PHONY:	cds-by-gene
-cds-by-gene:	$(FTAB) $(UFA) $(INDTAB)
+cds-by-gene:	$(FTAB) $(UFA) $(INDTAB) $(INDFA)
+
+$(PG)%.fa:	$(INDTAB)
+	cat $^ | grep "$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
 
 # prepare ind fasta files. Each file is 1 gene, but with the different cds regions in separate sequences
 $(PG)%4ht_cds.ftab:	$(SH)%4ht.fasta $(PG)%4ht.bed
