@@ -761,15 +761,17 @@ new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN
 #$(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt
 #new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)ufo_qt10k_RUFFv0.2_dp6.txt $(GEN2)usi_qt10k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs10k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs10k_RUFFv0.2_dp6.txt
 
-$(GEN2)%_qt_RUFFv0.2_dp6.txt:	$(GEN2)%_qt1_RUFFv0.2_dp6.txt $(GEN2)%_qt1k_RUFFv0.2_dp6.txt
-	grep "^Chromosome" -v $(word 2,$^) | awk ' BEGIN { print "p.1k" }; { print } ' > tmp_$*Pc1df.txt
-	paste -d" " $(word 1,$^) tmp$*Pc1df.tx > $@
 
-$(GEN2)%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)contigsize.txt $(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt
-	awk ' BEGIN { a=0; c=-1; LEN[-1]=0; print "Chromosome","Position","P1df","chrID","GenomePosition" }; NR==FNR { LEN[$$1]=$$2; next}; { if ($$1 != c) a+=LEN[c]; print $$0,$$2+a; c=$$1 } ' $(word 1,$^) $(word 2,$^) > $@
 
-$(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)u%_qt1_RUFFv0.2_dp6.txt
-		grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; COI[3357]=1270; COI[3047]=1271; COI[3208]=1272; COI[4111]=1273; COI[3750]=1274; COI[2063]=1275;COI[1270]=1276;COI[4944]=1277;COI[9013]=1278;COI[3913]=1279; }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { c=COI[$$1]; old_chr = $$1 } else { a++; if (a == 1270) a=1280; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c } ' | sort -k 4,4n -k 2,2n > $@	
+$(GEN2)%_qt_RUFFv0.2_dp6.txt:	$(GEN2)contigsize.txt $(GEN2)reord_u%_qt_RUFFv0.2_dp6.txt
+	awk ' BEGIN { a=0; c=-1; LEN[-1]=0; print "Chromosome","Position","P1df","chrID","p.1k","GenomePosition" }; NR==FNR { LEN[$$1]=$$2; next}; { if ($$1 != c) a+=LEN[c]; print $$0,$$2+a; c=$$1 } ' $(word 1,$^) $(word 2,$^) > $@
+
+$(GEN2)reord_u%_qt_RUFFv0.2_dp6.txt:	$(GEN2)pu%_qt_RUFFv0.2_dp6.txt
+		grep "^Chromosome" -v $^ | awk ' BEGIN { a=0; old_chr=-1; COI[3357]=1270; COI[3047]=1271; COI[3208]=1272; COI[4111]=1273; COI[3750]=1274; COI[2063]=1275;COI[1270]=1276;COI[4944]=1277;COI[9013]=1278;COI[3913]=1279; }; { if ($$1 != old_chr) { if ($$1 == 1270 || $$1 == 2063 || $$1 == 3047 || $$1 == 3208 || $$1 == 3357 || $$1 == 3750 || $$1 == 3913 || $$1 == 4111 || $$1 == 4944 || $$1 == 9013) { c=COI[$$1]; old_chr = $$1 } else { a++; if (a == 1270) a=1280; c=a; old_chr = $$1 } } print $$1,$$2,$$3,c,$$NF } ' | sort -k 4,4n -k 2,2n > $@	
+
+$(GEN2)pu%_qt_RUFFv0.2_dp6.txt:	$(GEN2)u%_qt1_RUFFv0.2_dp6.txt $(GEN2)u%_qt1k_RUFFv0.2_dp6.txt
+	grep "^Chromosome" -v $(word 2,$^) | awk ' BEGIN { print "p.1k" }; { print $$3 } ' > tmp_$*P1df.txt
+	paste -d" " $(word 1,$^) tmp$*P1df.txt > $@
 
 $(GEN2)contigsize.txt:	$(ALN)var_RUFFv0.2.vcf.gz
 	zcat $^ | grep "#contig=<ID=Contig" | awk '{ gsub("##contig=<ID=Contig","",$$0); gsub("length=","",$$0); gsub(">","",$$0); split($$0,a,","); print a[1],a[2] } ' > $@
