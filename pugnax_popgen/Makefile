@@ -33,7 +33,7 @@ CDSBED = $(addprefix $(PG),$(cdsbed))
 ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
 FTAB = $(subst .bed,.ftab,$(CDSBED))
 UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
-intab = $(addsuffix MB8684ht_cds.ftab,$(coi))
+indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
 INDTAB = $(addprefix $(PG)Contig,$(indtab))
 
 .PHONY:	cds-by-gene
