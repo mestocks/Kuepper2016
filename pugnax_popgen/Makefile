@@ -37,6 +37,10 @@ UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
 .PHONY:	cds-by-gene
 cds-by-gene:	$(FTAB) $(UFA)
 
+# prepare ind fasta files. Each file is 1 gene, but with the different cds regions in separate sequences
+$(PG)%4ht_cds.ftab:	$(SH)%4ht.fasta $(PG)%4ht.bed
+	bedtools getfasta -tab -name -s -fi $(word 1,$^) -bed $(word 2,$^) -fo - > $@
+
 # chr_geneid
 $(PG)%.fa:	$(FTAB)
 	cat $^ | grep "$*_" | awk -F"\t" ' { print ">"$$1"\n"$$2 } ' > $@
