@@ -40,6 +40,13 @@ INDTAB = $(addprefix $(PG)Contig,$(indtab))
 INDFA = $(addprefix $(PG)blst_,$(addsuffix .fa,$(indugenes)))
 kfa = $(subst MB8684,KILDEER,$(indugenes))
 KFA = $(addprefix $(PG),$(addsuffix .fa,$(kfa)))
+KCDS = $(addprefix $(PG)cds_,$(addsuffix .fa,$(kfa)))
+
+.PHONY:	kcat
+kcat:	$(KDS)
+
+$(PG)cds_%_KILDEER.fa:	$(PG)%_KILDEER.fa
+	awk -F"\t" ' { split($$1,a,"_"); A[a[1]"_"a[2]"_"a[3]]=A[a[1]"_"a[2]"_"a[3]]$$2 }; END { for (i in A) print ">"i"\n"A[i] } ' $^ > $@
 
 .PHONY:	kblast
 kblast:	$(KFA)
