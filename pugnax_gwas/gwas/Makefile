@@ -756,12 +756,13 @@ refnam2 = $(subst .fa,,$(ref2))
 ###### ######
 
 .PHONY:	new-qtscore
-new-qtscore:	$(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs10k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs10k_RUFFv0.2_dp6.txt
+new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)ufo_qt1k_RUFFv0.2_dp6.txt $(GEN2)usi_qt1k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt
 
+#$(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt
 #new-qtscore:	$(GEN2)fo_qt1_RUFFv0.2_dp6.txt $(GEN2)si_qt1_RUFFv0.2_dp6.txt $(GEN2)ufo_qt10k_RUFFv0.2_dp6.txt $(GEN2)usi_qt10k_RUFFv0.2_dp6.txt $(GEN2)contigsize.txt $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt $(GEN2)ufo_qtibs10k_RUFFv0.2_dp6.txt $(GEN2)usi_qtibs10k_RUFFv0.2_dp6.txt
 
-$(GEN2)%_qt_RUFFv0.2_dp6.txt:	$(GEN2)%_qt1_RUFFv0.2_dp6.txt $(GEN2)%_qt10k_RUFFv0.2_dp6.txt
-	grep "^Chromosome" -v $(word 2,$^) | awk ' BEGIN { print "p.10k" }; { print } ' > tmp_$*Pc1df.txt
+$(GEN2)%_qt_RUFFv0.2_dp6.txt:	$(GEN2)%_qt1_RUFFv0.2_dp6.txt $(GEN2)%_qt1k_RUFFv0.2_dp6.txt
+	grep "^Chromosome" -v $(word 2,$^) | awk ' BEGIN { print "p.1k" }; { print } ' > tmp_$*Pc1df.txt
 	paste -d" " $(word 1,$^) tmp$*Pc1df.tx > $@
 
 $(GEN2)%_qt1_RUFFv0.2_dp6.txt:	$(GEN2)contigsize.txt $(GEN2)reord_u%_qt1_RUFFv0.2_dp6.txt
@@ -779,11 +780,11 @@ $(GEN2)ufo_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 $(GEN2)usi_qt1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ si 1 FALSE
 
-$(GEN2)ufo_qt10k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
-	Rscript qtscore.r $^ $@ fo 10000 FALSE
+$(GEN2)ufo_qt1k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ fo 1000 FALSE
 
-$(GEN2)usi_qt10k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
-	Rscript qtscore.r $^ $@ si 10000 FALSE
+$(GEN2)usi_qt1k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ si 1000 FALSE
 
 $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ fo 1 TRUE
@@ -791,11 +792,11 @@ $(GEN2)ufo_qtibs1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.
 $(GEN2)usi_qtibs1_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
 	Rscript qtscore.r $^ $@ si 1 TRUE
 
-$(GEN2)ufo_qtibs10k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
-	Rscript qtscore.r $^ $@ fo 10000 TRUE
+$(GEN2)ufo_qtibs1k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ fo 1000 TRUE
 
-$(GEN2)usi_qtibs10k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
-	Rscript qtscore.r $^ $@ si 10000 TRUE
+$(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2.txt
+	Rscript qtscore.r $^ $@ si 1000 TRUE
 
 ###### ######
 
