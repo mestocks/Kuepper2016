@@ -771,7 +771,7 @@ $(GEN2)reord_u%_qt_RUFFv0.2_dp6.txt:	$(GEN2)pu%_qt_RUFFv0.2_dp6.txt
 
 $(GEN2)pu%_qt_RUFFv0.2_dp6.txt:	$(GEN2)u%_qt1_RUFFv0.2_dp6.txt $(GEN2)u%_qt1k_RUFFv0.2_dp6.txt
 	grep "^Chromosome" -v $(word 2,$^) | awk ' BEGIN { print "p.1k" }; { print $$3 } ' > tmp_$*P1df.txt
-	paste -d" " $(word 1,$^) tmp$*P1df.txt > $@
+	paste -d" " $(word 1,$^) tmp_$*P1df.txt > $@
 
 $(GEN2)contigsize.txt:	$(ALN)var_RUFFv0.2.vcf.gz
 	zcat $^ | grep "#contig=<ID=Contig" | awk '{ gsub("##contig=<ID=Contig","",$$0); gsub("length=","",$$0); gsub(">","",$$0); split($$0,a,","); print a[1],a[2] } ' > $@
