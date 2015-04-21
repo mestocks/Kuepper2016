@@ -42,7 +42,8 @@ kfa = $(subst MB8684,KILDEER,$(indugenes))
 KFA = $(addprefix $(PG),$(addsuffix .fa,$(kfa)))
 KCDS = $(addprefix $(PG)cds_,$(addsuffix .fa,$(kfa)))
 
-AFA = $(subst $(PG),$(PG)all_,$(UFA))
+afa = $(subst _KILDEER,,$(KFA))
+AFA = $(subst $(PG),$(PG)all_,$(afa))
 
 .PNONY:	catall
 catall:	$(AFA)
