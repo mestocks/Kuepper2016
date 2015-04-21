@@ -37,7 +37,7 @@ FTAB = $(subst .bed,.ftab,$(CDSBED))
 UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
 indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
 INDTAB = $(addprefix $(PG)Contig,$(indtab))
-INDFA = $(addprefix $(PG)blst_,$(addsuffix _blst.fa,$(indugenes)))
+INDFA = $(addprefix $(PG)blst_,$(addsuffix .fa,$(indugenes)))
 
 .PHONY:	cds-by-gene
 cds-by-gene:	$(FTAB) $(UFA) $(INDTAB) $(INDFA)
