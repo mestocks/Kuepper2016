@@ -814,8 +814,11 @@ $(GEN2)usi_qtibs1k_RUFFv0.2_dp6.txt:	$(GEN2)RUFFv0.2_dp6.raw $(GEN2)phe_RUFFv0.2
 .PHONY:	new-QC
 new-QC:	$(GEN2)RUFFv0.2_dp6_qc.raw $(GEN2)phe_RUFFv0.2_qc.txt
 
-$(GEN2)RUFFv0.2_dp6_qc.raw $(GEN2)phe_RUFFv0.2_qc.txt:	$(GEN2)phe_RUFFv0.2.txt $(GEN2)RUFFv0.2_dp6.raw
-	Rscript clean_data.r $^ $@
+$(GEN2)phe_RUFFv0.2_qc.txt:	$(GEN2)RUFFv0.2_dp6_qc.raw
+	echo "present"
+
+$(GEN2)RUFFv0.2_dp6_qc.raw:	$(GEN2)phe_RUFFv0.2.txt $(GEN2)RUFFv0.2_dp6.raw
+	Rscript clean_data.r $(GEN2)phe_RUFFv0.2_qc.txt $^ $@
 
 ###### ######
 
