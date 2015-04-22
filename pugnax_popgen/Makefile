@@ -106,6 +106,35 @@ inv%_depth.txt:	inv_depth.txt.gz
 
 ###### ######
 
+wgs5-sf = $(PG)faen12_wgs5.txt $(PG)satn12_wgs5.txt $(PG)indn12_wgs5.txt
+
+wgs5-10k-1k = $(subst wgs5,wgs5_10k_1k,$(wgs5))
+wgs5-5k-500 = $(subst wgs5,wgs5_10k_1k,$(wgs5))
+wgs5-1k-1 = $(subst wgs5,wgs5_10k_1k,$(wgs5))
+
+.PHONY:	theta
+theta:	$(wgs5-10k-1k) $(wgs5-5k-500) $(wgs5-1k-1)
+
+$(PG)%_10k_1k.txt:	$(PG)%.txt
+	cat $^ | sltheta 4 10000 1000 > $@
+
+$(PG)%_5k_500.txt:	$(PG)%.txt
+	cat $^ | sltheta 4 5000 500 > $@
+
+$(PG)%_1k_1.txt:	$(PG)%.txt
+	cat $^ | sltheta 4 1000 1 > $@
+
+$(PG)indn12_wgs5_10k_1k.txt:	$(PG)indn12_wgs5.txt
+	cat $^ | sltheta 2 10000 1000 > $@
+
+$(PG)indn12_wgs5_5k_500.txt:	$(PG)indn12_wgs5.txt
+	cat $^ | sltheta 2 5000 500 > $@
+
+$(PG)indn12_wgs5_1k_1.txt:	$(PG)indn12_wgs5.txt
+	cat $^ | sltheta 2 1000 1 > $@
+
+###### ######
+
 dxygz = $(PG)dxyF_I.txt.gz $(PG)dxyF_S.txt.gz $(PG)dxyS_I.txt.gz $(PG)dxyF_SI.txt.gz
 dxygz17 = $(PG)dxy17_F_I.txt.gz $(PG)dxy17_F_S.txt.gz $(PG)dxy17_S_I.txt.gz $(PG)dxy17_F_SI.txt.gz
 
