@@ -109,8 +109,8 @@ inv%_depth.txt:	inv_depth.txt.gz
 wgs5-sf = $(PG)faen12_wgs5.txt $(PG)satn12_wgs5.txt $(PG)indn12_wgs5.txt
 
 wgs5-10k-1k = $(subst wgs5,wgs5_10k_1k,$(wgs5))
-wgs5-5k-500 = $(subst wgs5,wgs5_10k_1k,$(wgs5))
-wgs5-1k-1 = $(subst wgs5,wgs5_10k_1k,$(wgs5))
+wgs5-5k-500 = $(subst wgs5,wgs5_5k_5k,$(wgs5))
+wgs5-1k-1 = $(subst wgs5,wgs5_1k_1,$(wgs5))
 
 .PHONY:	theta
 theta:	$(wgs5-10k-1k) $(wgs5-5k-500) $(wgs5-1k-1)
