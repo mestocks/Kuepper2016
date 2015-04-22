@@ -13,12 +13,12 @@ gen.out <- args[4]
 data <- load_and_qc(phe.in, gen.in, qc = FALSE)
 
 quality <- check.marker(data, 
-                        call = 0.5, 
+                        call = 0, 
                         p.level = 1e-5, 
                         perid.call = 0, 
                         extr.call = 0, 
                         extr.perid.call = 0, 
-                        maf = 0, 
+                        #maf = 0, 
                         ibs.exclude = "none")
 
 data.clean <- data[quality$idok, quality$snpok]
