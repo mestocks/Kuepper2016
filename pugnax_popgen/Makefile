@@ -119,12 +119,12 @@ fs_5k500 = dxy_fs_5k500.txt
 allfiles = $(altsnps) $(rf_1k1) $(rf_5k500) $(rs_1k1) $(rs_5k500) $(fs_1k1) $(fs_5k500)
 
 ctigs = 1270 2063 3047 3208 3357 3913 4111 9013
-CTIGS = $(prefix $(PG)Contig,$(ctigs))
+CTIGS = $(addprefix $(PG)Contig,$(ctigs))
 
 ALLF = $(foreach d,$(allfiles),$(addsuffix $(d),$(CTIGS)))
 
 .PHONY:	alt-dxy
-alt-dxy:	$(CTIGS)
+alt-dxy:	$(ALLF)
 
 $(PG)Contig%dxy_rf_5k500.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_5k500_sl.txt
 	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > tmp$*_5k500_pos.txt
