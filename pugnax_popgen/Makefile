@@ -116,7 +116,7 @@ $(PG)Contig%dxy_rf_5k500.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_5k500_sl
 $(PG)Contig%dxy_rf_5k500_sl.txt:	$(PG)Contig%dxy_rf.txt
 	cat $^ | slmean -k 3 -w 5000 -s 500 > $@
 
-$(PG)Contig%dxy_rf.txt:	$(PG)Contig%altsnps
+$(PG)Contig%dxy_rf.txt:	$(PG)Contig%altsnps.txt
 	awk ' { print $$1,$$2,($$7+$$8)/2 } ' $^ > $@
 
 $(PG)Contig%altsnps.txt:	hapalign/Contig%ht_ref_alignment.mafft.fasta
