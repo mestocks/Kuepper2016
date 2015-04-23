@@ -103,6 +103,24 @@ cov%_sl.txt:	inv%_depth.txt
 inv%_depth.txt:	inv_depth.txt.gz
 	zcat $^ | grep "Contig$*" > $@
 
+###### ######
+
+.PHONY:	alt-dxy
+alt-dxy:	$(PG)Contig1270dxy_rf_5k500.txt $(PG)Contig1270altsnps.txt $(PG)Contig3357dxy_rf_5k500.txt $(PG)Contig3357altsnps.txt
+
+$(PG)Contig%dxy_rf_5k500.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_5k500_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > tmp$*_5k500_pos.txt
+	paste -d" " tmp$*_5k500_pos.txt $(word 2,$^) > $@
+	rm tmp$*_5k500_pos.txt
+
+$(PG)Contig%dxy_rf_5k500_sl.txt:	$(PG)Contig%dxy_rf.txt
+	cat $^ | slmean -k 3 -w 5000 -s 500 > $@
+
+$(PG)Contig%dxy_rf.txt:	$(PG)Contig%altsnps
+	awk ' { print $$1,$$2,($$7+$$8)/2 } ' $^ > $@
+
+$(PG)Contig%altsnps.txt:	hapalign/Contig%ht_ref_alignment.mafft.fasta
+	python ~/lib/Evolib/fabysite.py $^ > $@
 
 ###### ######
 
