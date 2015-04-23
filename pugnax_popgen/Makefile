@@ -124,7 +124,7 @@ CTIGS = $(prefix $(PG)Contig,$(ctigs))
 ALLF = $(foreach d,$(allfiles),$(addsuffix $(d),$(CTIGS)))
 
 .PHONY:	alt-dxy
-alt-dxy:	$(ALLF)
+alt-dxy:	$(allfiles)
 
 $(PG)Contig%dxy_rf_5k500.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_5k500_sl.txt
 	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > tmp$*_5k500_pos.txt
