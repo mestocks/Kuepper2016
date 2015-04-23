@@ -121,7 +121,7 @@ allfiles = $(altsnps) $(rf_1k1) $(rf_5k500) $(rs_1k1) $(rs_5k500) $(fs_1k1) $(fs
 ctigs = 1270 2063 3047 3208 3357 3913 4111 9013
 CTIGS = $(prefix $(PG)Contig,$(ctigs))
 
-ALLF = $(foreach d,$(allfiles),$(addprefix $(d),$(CTIGS)))
+ALLF = $(foreach d,$(allfiles),$(addsuffix $(d),$(CTIGS)))
 
 .PHONY:	alt-dxy
 alt-dxy:	$(ALLF)
