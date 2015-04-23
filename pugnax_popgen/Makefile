@@ -105,8 +105,26 @@ inv%_depth.txt:	inv_depth.txt.gz
 
 ###### ######
 
+altsnps = altsnps.txt
+
+rf_1k1 = dxy_rf_1k1.txt
+rf_5k500 = dxy_rf_5k500.txt
+
+rs_1k1 = dxy_rs_1k1.txt
+rs_5k500 = dxy_rs_5k500.txt
+
+fs_1k1 = dxy_fs_1k1.txt
+fs_5k500 = dxy_fs_5k500.txt
+
+allfiles = $(altsnps) $(rf_1k1) $(rf_5k500) $(rs_1k1) $(rs_5k500) $(fs_1k1) $(fs_5k500)
+
+ctigs = 1270 2063 3047 3208 3357 3913 4111 9013
+CTIGS = $(prefix $(PG)Contig,$(ctigs))
+
+ALLF = $(foreach d,$(allfiles),$(addprefix $(d),$(CTIGS)))
+
 .PHONY:	alt-dxy
-alt-dxy:	$(PG)Contig1270altsnps.txt $(PG)Contig3357altsnps.txt $(PG)Contig1270dxy_rf_5k500.txt $(PG)Contig3357dxy_rf_5k500.txt $(PG)Contig1270dxy_rf_1k1.txt $(PG)Contig3357dxy_rf_1k1.txt $(PG)Contig1270dxy_rs_5k500.txt $(PG)Contig3357dxy_rs_5k500.txt $(PG)Contig1270dxy_rs_1k1.txt $(PG)Contig3357dxy_rs_1k1.txt $(PG)Contig1270dxy_fs_5k500.txt $(PG)Contig3357dxy_fs_5k500.txt $(PG)Contig1270dxy_fs_1k1.txt $(PG)Contig3357dxy_fs_1k1.txt
+alt-dxy:	$(ALLF)
 
 $(PG)Contig%dxy_rf_5k500.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_5k500_sl.txt
 	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > tmp$*_5k500_pos.txt
