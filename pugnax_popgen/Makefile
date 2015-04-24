@@ -187,7 +187,7 @@ $(PG)Contig%dxy_rs.txt:	$(PG)Contig%altsnps.txt
 	awk ' { print $$1,$$2,($$5+$$6)/2 } ' $^ > $@
 
 $(PG)Contig%dxy_fs.txt:	$(PG)Contig%altsnps.txt
-	awk ' { if ($$5=="NA) { B1="NA"; B2="NA"; A1="NA"; A2="NA" } else { B1=$$5+$$6; B2=$$7+$$8; A1=2-B1; A2=2-B2 }; print $$1,$$2,((A1*B2)+(A2*B1))/4 } ' $^ > $@
+	awk ' { if ($$5=="NA") { B1="NA"; B2="NA"; A1="NA"; A2="NA" } else { B1=$$5+$$6; B2=$$7+$$8; A1=2-B1; A2=2-B2 }; print $$1,$$2,((A1*B2)+(A2*B1))/4 } ' $^ > $@
 #	awk ' { print $$1,$$2,(($$5*$$8)+($$6*$$7))/4 } ' $^ > $@
 
 $(PG)Contig%altsnps.txt:	hapalign/Contig%ht_ref_alignment.mafft.fasta
