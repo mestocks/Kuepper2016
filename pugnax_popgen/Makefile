@@ -110,16 +110,19 @@ altsnps = altsnps.txt
 rf_1k1 = dxy_rf_1k1.txt
 rf_5k500 = dxy_rf_5k500.txt
 rf_10k1k = dxy_rf_10k1k.txt
+rf_50k1k = dxy_rf_50k1k.txt
 
 rs_1k1 = dxy_rs_1k1.txt
 rs_5k500 = dxy_rs_5k500.txt
 rs_10k1k = dxy_rs_10k1k.txt
+rs_50k1k = dxy_rs_50k1k.txt
 
 fs_1k1 = dxy_fs_1k1.txt
 fs_5k500 = dxy_fs_5k500.txt
 fs_10k1k = dxy_fs_10k1k.txt
+fs_50k1k = dxy_fs_50k1k.txt
 
-allfiles = $(altsnps) $(rf_1k1) $(rf_5k500) $(rf_10k1k) $(rs_1k1) $(rs_5k500) $(rs_10k1k) $(fs_1k1) $(fs_5k500) $(fs_10k1k)
+allfiles = $(altsnps) $(rf_1k1) $(rf_5k500) $(rf_10k1k) $(rf_50k1k) $(rs_1k1) $(rs_5k500) $(rs_10k1k) $(rs_50k1k) $(fs_1k1) $(fs_5k500) $(fs_10k1k) $(fs_50k1k)
 
 ctigs = 1270 2063 3047 3208 3357 3913 4111 9013
 CTIGS = $(addprefix $(PG)Contig,$(ctigs))
@@ -128,6 +131,14 @@ ALLF = $(foreach d,$(allfiles),$(addsuffix $(d),$(CTIGS)))
 
 .PHONY:	alt-dxy
 alt-dxy:	$(ALLF)
+
+$(PG)Contig%dxy_rf_50k1k.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_50k1k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 1000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > tmp$*_50k1k_pos.txt
+	paste -d" " tmp$*_50k1k_pos.txt $(word 2,$^) > $@
+	rm tmp$*_50k1k_pos.txt
+
+$(PG)Contig%dxy_rf_50k1k_sl.txt:	$(PG)Contig%dxy_rf.txt
+	cat $^ | slmean -k 3 -w 50000 -s 1000 > $@
 
 $(PG)Contig%dxy_rf_10k1k.txt:	$(PG)Contig%dxy_rf.txt $(PG)Contig%dxy_rf_10k1k_sl.txt
 	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 10000) { s++; if (s == 1000) { s = 0; print $$2 - (10000 / 2) } } } ' $(word 1,$^) > tmp$*_10k1k_pos.txt
@@ -163,6 +174,14 @@ $(PG)Contig%dxy_rs_10k1k.txt:	$(PG)Contig%dxy_rs.txt $(PG)Contig%dxy_rs_10k1k_sl
 $(PG)Contig%dxy_rs_10k1k_sl.txt:	$(PG)Contig%dxy_rs.txt
 	cat $^ | slmean -k 3 -w 10000 -s 1000 > $@
 
+$(PG)Contig%dxy_rs_50k1k.txt:	$(PG)Contig%dxy_rs.txt $(PG)Contig%dxy_rs_50k1k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 1000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > tmp$*_50k1k_pos.txt
+	paste -d" " tmp$*_50k1k_pos.txt $(word 2,$^) > $@
+	rm tmp$*_50k1k_pos.txt
+
+$(PG)Contig%dxy_rs_50k1k_sl.txt:	$(PG)Contig%dxy_rs.txt
+	cat $^ | slmean -k 3 -w 50000 -s 1000 > $@
+
 $(PG)Contig%dxy_rs_5k500.txt:	$(PG)Contig%dxy_rs.txt $(PG)Contig%dxy_rs_5k500_sl.txt
 	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 5000) { s++; if (s == 500) { s = 0; print $$2 - (5000 / 2) } } } ' $(word 1,$^) > tmp$*_5k500_pos.txt
 	paste -d" " tmp$*_5k500_pos.txt $(word 2,$^) > $@
@@ -180,6 +199,14 @@ $(PG)Contig%dxy_rs_1k1_sl.txt:	$(PG)Contig%dxy_rs.txt
 	cat $^ | slmean -k 3 -w 1000 -s 1 > $@
 
 ##
+
+$(PG)Contig%dxy_fs_50k1k.txt:	$(PG)Contig%dxy_fs.txt $(PG)Contig%dxy_fs_50k1k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 1000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > tmp$*_50k1k_pos.txt
+	paste -d" " tmp$*_50k1k_pos.txt $(word 2,$^) > $@
+	rm tmp$*_50k1k_pos.txt
+
+$(PG)Contig%dxy_fs_50k1k_sl.txt:	$(PG)Contig%dxy_fs.txt
+	cat $^ | slmean -k 3 -w 50000 -s 1000 > $@
 
 $(PG)Contig%dxy_fs_10k1k.txt:	$(PG)Contig%dxy_fs.txt $(PG)Contig%dxy_fs_10k1k_sl.txt
 	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 10000) { s++; if (s == 1000) { s = 0; print $$2 - (10000 / 2) } } } ' $(word 1,$^) > tmp$*_10k1k_pos.txt
