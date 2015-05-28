@@ -28,6 +28,28 @@ COV = $(addsuffix .txt,$(all-cov))
 
 ###### ######
 
+.PHONY:	mltrees
+mltrees:	RAxML_bestTree.KRISSFF3357_150000_160000.ph RAxML_bestTree.KR3357_280000_290000.ph RAxML_bestTree.KRISSFF3208.ph RAxML_bestTree.KRISSFF3913_150000_160000.ph
+
+#mltrees:	RAxML_bestTree.KRISSFF3357_150000_160000.ph RAxML_bestTree.KR3357_280000_290000.ph RAxML_bootstrap.KRISSFF3357_150000_160000.phb RAxML_bootstrap.KR3357_280000_290000.phb RAxML_bestTree.KRISSFF3357_150000_160000.phz RAxML_bestTree.KR3357_280000_290000.phz
+
+#RAxML_bestTree.%.phz:	RAxML_bestTree.%.ph RAxML_bootstrap.%.phb
+#	/home/mist/Documents/standard-RAxML-8.1.20/raxmlHPC-AVX -m GTRCAT -f b -t $(word 1,$^) -z $(word 2,$^) -n $*.phz 
+
+#RAxML_bootstrap.%.phb:	%_aln_edit.fa
+#	/home/mist/Documents/standard-RAxML-8.1.20/raxmlHPC-AVX -m GTRGAMMA -s $^ -o Kildeer -n $*.phb -p 123123 -b 123123 -# 50
+
+#RAxML_bestTree.%.ph:	%_aln_edit.fa
+#	/home/mist/Documents/standard-RAxML-8.1.20/raxmlHPC-AVX -m GTRGAMMA -s $^ -o Kildeer -n $*.ph -p 123123 -# 50
+
+RAxML_bestTree.%.ph:	%_aln_edit.fa
+	/home/mist/Documents/standard-RAxML-8.1.20/raxmlHPC-AVX -m GTRGAMMA -s $^ -o Kildeer -n $*.ph -p 123123 -# 50
+
+%_aln_edit.fa:	%_aln.fa
+	awk ' { if ($$0 ~ "scaffold") print ">Kildeer"; else { gsub(":","_",$$0); print $$0 } } ' $^ > $@
+
+###### ######
+
 CDSBED = $(addprefix $(PG),$(cdsbed))
 # Contig1270_g2
 ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
@@ -246,6 +268,11 @@ $(PG)Contig%dxy_fs.txt:	$(PG)Contig%altsnps.txt
 
 $(PG)Contig%altsnps.txt:	hapalign/Contig%ht_ref_alignment.mafft.fasta
 	python ~/lib/Evolib/fabysite.py $^ > $@
+
+###### ######
+
+#$(PG)Contig3357dxy_ki.txt:	$(PG)KRISSFF3357.txt
+#	awk ' { if ($$3 == "NA" || $$4 == "NA) { print $$1,$$2,"NA" } else { der=$$3+$$4; anc=2-der; print $$1,$$2,}  } ' $^ > $@
 
 ###### ######
 

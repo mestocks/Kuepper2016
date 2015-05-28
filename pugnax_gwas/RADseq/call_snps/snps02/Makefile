@@ -1,7 +1,7 @@
 ###### ######
 
 USR = $(shell echo $$USER)
-PTH = /data/$(USR)/ruff/pugnax_gwas/RADseq/call_snps/snp02/
+PTH = /data/$(USR)/ruff/pugnax_gwas/RADseq/call_snps/snps02/
 
 ASS = $(PTH)assemblies/
 PRO = $(PTH)processed_rads/cons001/
