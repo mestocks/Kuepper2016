@@ -146,7 +146,7 @@ fs_50k1k = dxy_fs_50k1k.txt
 
 allfiles = $(altsnps) $(rf_1k1) $(rf_5k500) $(rf_10k1k) $(rf_50k1k) $(rs_1k1) $(rs_5k500) $(rs_10k1k) $(rs_50k1k) $(fs_1k1) $(fs_5k500) $(fs_10k1k) $(fs_50k1k)
 
-ctigs = 1270 2063 3047 3208 3357 3913 4111 9013
+ctigs = 1270 2063 2548 3047 3208 3357 3913 4111 9013
 CTIGS = $(addprefix $(PG)Contig,$(ctigs))
 
 ALLF = $(foreach d,$(allfiles),$(addsuffix $(d),$(CTIGS)))
