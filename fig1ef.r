@@ -1,4 +1,6 @@
-pdf("fig1ef.pdf", width = 8, height = 10)
+#pdf("fig1ef.pdf", width = 8, height = 10)
+tiff("fig1ef.tiff", width = 4, height = 5, units = "in",
+     res = 400, pointsize = 5)
 
 data1ef <- read.table("fig1ef.csv", header = T, sep = ",")
 
@@ -39,11 +41,6 @@ plot.df <- function(data, color) {
 
     lines(data$day, data$mu,
           col = color, lwd = 2)
-
-    xat <- c(90, 120, 151, 181)
-    dates <- seq(as.Date("2013-04-01"), as.Date("2013-07-01"), by = "month")
-    axis(1, at = xat, labels = format(dates, "%B 1st"))
-    axis(2, las = 2)
 }
 
 ind.col <- "indianred"
@@ -54,9 +51,9 @@ ind <- data1ef[data1ef$Morph == "I", ]
 sat <- data1ef[data1ef$Morph == "S", ]
 fae <- data1ef[data1ef$Morph == "F", ]
 
-par(mfrow = c(2, 1), mar = c(5, 4, 2, 2) + 0.1)
+par(mfrow = c(2, 1), mar = c(5, 4, 2, 2) + 0.1, mgp = c(2.5, 1, 0))
 
-xlabel <- "Date"
+xlabel <- "Sample date"
 xlimit <- c(76, 189)
 
 # A4 concentration
@@ -75,6 +72,11 @@ plot(0, 0, type = 'n', bty = 'l', xaxt = 'n', yaxt = 'n',
 plot.df(ind.df, ind.col)
 plot.df(sat.df, sat.col)
 plot.df(fae.df, fae.col)
+
+xat <- c(90, 120, 151, 181)
+dates <- seq(as.Date("2013-04-01"), as.Date("2013-07-01"), by = "month")
+axis(1, at = xat, labels = format(dates, "%B 1st"))
+axis(2, las = 2)
 
 legend(75, 12, c("Independents", "Satellites", "Faeders"),
        col = c(ind.col, sat.col, fae.col), lwd = 2, bty = 'n')
@@ -98,6 +100,11 @@ plot(0, 0, type = 'n', bty = 'l', xaxt = 'n', yaxt = 'n',
 plot.df(ind.df, ind.col)
 plot.df(sat.df, sat.col)
 plot.df(fae.df, fae.col)
+
+xat <- c(90, 120, 151, 181)
+dates <- seq(as.Date("2013-04-01"), as.Date("2013-07-01"), by = "month")
+axis(1, at = xat, labels = format(dates, "%B 1st"))
+axis(2, las = 2)
 
 mtext("f", font = 2, line = 0.25, cex = 1.4,
         at = par("usr")[1] - 10)
