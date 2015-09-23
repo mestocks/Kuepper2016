@@ -389,8 +389,12 @@ $(PG)dxy%_1k_1_sl.txt:	$(PG)dxy%.txt
 .PHONY:	dxy2548
 dxy2548:	$(PG)dxywinF_SI_2548_50k_5k.txt $(PG)dxywinF_I_2548_50k_5k.txt $(PG)dxywinS_I_2548_50k_5k.txt $(PG)dxywinF_S_2548_50k_5k.txt
 
-$(PG)dxywin%_2548
+$(PG)dxywin%_2548_50k_5k.txt:	$(PG)dxy%_2548.txt $(PG)dxy%_2548_50k_5k_sl.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 5000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_2548_50k_5k_pos.txt
+	paste -d" " $(PG)dxy$*_2548_50k_5k_pos.txt $(word 2,$^) > $@
 
+$(PG)dxy%_2548_50k_5k_sl.txt:	$(PG)dxy%_2548.txt
+	cat $^ | slmean -k 7 -w 50000 -s 5000 > $@
 ##
 
 .PHONY:	nalleles17
