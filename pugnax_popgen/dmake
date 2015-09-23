@@ -1,0 +1,37 @@
+PG = pg01/
+
+.PHONY:	dxy2548
+dxy2548:	$(PG)dxywinF_SI_2548_50k_5k.txt $(PG)dxywinF_I_2548_50k_5k.txt $(PG)dxywinS_I_2548_50k_5k.txt $(PG)dxywinF_S_2548_50k_5k.txt
+
+$(PG)dxywin%_2548_50k_5k.txt:	$(PG)dxy%_2548.txt $(PG)sldxy%_2548_50k_5k.txt
+	awk ' BEGIN { n = 0; s = 0 }{ n++; if (n >= 50000) { s++; if (s == 5000) { s = 0; print $$2 - (50000 / 2) } } } ' $(word 1,$^) > $(PG)dxy$*_2548_50k_5k_pos.txt
+	paste -d" " $(PG)dxy$*_2548_50k_5k_pos.txt $(word 2,$^) > $@
+
+$(PG)sldxy%_2548_50k_5k.txt:	$(PG)dxy%_2548.txt
+	cat $^ | slmean -k 7 -w 50000 -s 5000 > $@
+
+
+$(PG)dxyF_I_%.txt:	$(PG)dxyF_I.txt.gz
+	zcat $^ | grep "Contig$*" > $@
+
+$(PG)dxyF_S_%.txt:	$(PG)dxyF_S.txt.gz
+	zcat $^ | grep "Contig$*" > $@
+
+$(PG)dxyS_I_%.txt:	$(PG)dxyS_I.txt.gz
+	zcat $^ | grep "Contig$*" > $@
+
+$(PG)dxyF_SI_%.txt:	$(PG)dxyF_SI.txt.gz
+	zcat $^ | grep "Contig$*" > $@
+
+
+$(PG)dxyF_I.txt.gz:	$(PG)inv.vcf
+	cat $^ | dxy F_I wgs5 | gzip > $@
+
+$(PG)dxyF_S.txt.gz:	$(PG)inv.vcf
+	cat $^ | dxy F_S wgs5 | gzip > $@
+
+$(PG)dxyS_I.txt.gz:	$(PG)inv.vcf
+	cat $^ | dxy S_I wgs5 | gzip > $@
+
+$(PG)dxyF_SI.txt.gz:	$(PG)inv.vcf
+	cat $^ | dxy F_SI wgs5 | gzip > $@
