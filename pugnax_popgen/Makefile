@@ -7,7 +7,8 @@ SH = /shared/Molecol/NBAF/ruff/diag/phasing/
 AA = $(SH)aa/
 
 slpar = -w $(lwin) -s $(step)
-coi = 1270 2063 3047 3208 3357 3750 3913 4111 4944 9013
+coi = 2548
+#coi = 1270 2063 2548 3047 3208 3357 3750 3913 4111 4944 9013
 phased = MB8684ht MB8685ht MB8686ht MB8687ht MB8688ht
 
 pcoi = $(addprefix Contig,$(coi))
@@ -50,22 +51,22 @@ RAxML_bestTree.%.ph:	%_aln_edit.fa
 
 ###### ######
 
-CDSBED = $(addprefix $(PG),$(cdsbed))
+#CDSBED = $(addprefix $(PG),$(cdsbed))
 # Contig1270_g2
-ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
-indugenes = $(shell cat $(CDSBED) | grep "MB8684" | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3]"_"a[2] } ' | sort | uniq)
+#ugenes = $(shell cat $(CDSBED) | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3] } ' | sort | uniq)
+#indugenes = $(shell cat $(CDSBED) | grep "MB8684" | awk -F"\t" ' { split($$4,a,"_"); print a[1]"_"a[3]"_"a[2] } ' | sort | uniq)
 
-FTAB = $(subst .bed,.ftab,$(CDSBED))
-UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
-indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
-INDTAB = $(addprefix $(PG)Contig,$(indtab))
-INDFA = $(addprefix $(PG)blst_,$(addsuffix .fa,$(indugenes)))
-kfa = $(subst MB8684,KILDEER,$(indugenes))
-KFA = $(addprefix $(PG),$(addsuffix .fa,$(kfa)))
-KCDS = $(addprefix $(PG)cds_,$(addsuffix .fa,$(kfa)))
+#FTAB = $(subst .bed,.ftab,$(CDSBED))
+#UFA = $(addprefix $(PG),$(addsuffix .fa,$(ugenes)))
+#indtab = $(addsuffix MB8684ht_cds.ftab,$(coi))
+#INDTAB = $(addprefix $(PG)Contig,$(indtab))
+#INDFA = $(addprefix $(PG)blst_,$(addsuffix .fa,$(indugenes)))
+#kfa = $(subst MB8684,KILDEER,$(indugenes))
+#KFA = $(addprefix $(PG),$(addsuffix .fa,$(kfa)))
+#KCDS = $(addprefix $(PG)cds_,$(addsuffix .fa,$(kfa)))
 
-afa = $(subst _KILDEER,,$(KFA))
-AFA = $(subst $(PG),$(PG)all_,$(afa))
+#afa = $(subst _KILDEER,,$(KFA))
+#AFA = $(subst $(PG),$(PG)all_,$(afa))
 
 .PNONY:	catall
 catall:	$(AFA)
@@ -331,7 +332,9 @@ dxy17-50k5k = $(subst .txt,_50k_5k.txt,$(dxywin17))
 
 ##
 
-dxywindows = $(dxy50k5k) $(dxy20k2k) $(dxy20k1k) $(dxy10k1k) $(dxy5k500) $(dxy1k1) $(dxy17-50k5k) $(dxy17-20k2k) $(dxy17-20k1k) $(dxy17-10k1k) $(dxy17-5k500) $(dxy17-1k1)
+dxywindows = $(dxy50k5k)
+#$(dxy20k2k) $(dxy20k1k) $(dxy10k1k) $(dxy5k500) $(dxy1k1)
+#$(dxy17-50k5k) $(dxy17-20k2k) $(dxy17-20k1k) $(dxy17-10k1k) $(dxy17-5k500) $(dxy17-1k1)
 
 # dxyF_I_1270_10k_1k_sl.txt dxyF_I_1270_10k_1k_pos.txt dxyF_I_1270_10k_1k.txt
 
@@ -382,6 +385,11 @@ $(PG)dxy%_5k_500_sl.txt:	$(PG)dxy%.txt
 
 $(PG)dxy%_1k_1_sl.txt:	$(PG)dxy%.txt
 	cat $^ | slmean -k 7 -w 1000 -s 1 > $@
+
+.PHONY:	dxy2548
+dxy2548:	$(PG)dxywinF_SI_2548_50k_5k.txt $(PG)dxywinF_I_2548_50k_5k.txt $(PG)dxywinS_I_2548_50k_5k.txt $(PG)dxywinF_S_2548_50k_5k.txt
+
+$(PG)dxywin%_2548
 
 ##
 
