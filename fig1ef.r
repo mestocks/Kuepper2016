@@ -1,6 +1,6 @@
 #pdf("fig1ef.pdf", width = 8, height = 10)
-tiff("fig1ef.tiff", width = 4, height = 5, units = "in",
-     res = 400, pointsize = 5)
+#tiff("fig1ef.tiff", width = 4, height = 5, units = "in",
+#     res = 400, pointsize = 5)
 
 data1ef <- read.table("fig1ef.csv", header = T, sep = ",")
 
@@ -51,7 +51,7 @@ ind <- data1ef[data1ef$Morph == "I", ]
 sat <- data1ef[data1ef$Morph == "S", ]
 fae <- data1ef[data1ef$Morph == "F", ]
 
-par(mfrow = c(2, 1), mar = c(5, 4, 2, 2) + 0.1, mgp = c(2.5, 1, 0))
+#par(mfrow = c(2, 1), mar = c(5, 4, 2, 2) + 0.1, mgp = c(2.5, 1, 0))
 
 xlabel <- "Sample date"
 xlimit <- c(76, 189)
@@ -79,10 +79,10 @@ axis(1, at = xat, labels = format(dates, "%B 1st"))
 axis(2, las = 2)
 
 legend(75, 12, c("Independents", "Satellites", "Faeders"),
-       col = c(ind.col, sat.col, fae.col), lwd = 2, bty = 'n')
+       col = c(ind.col, sat.col, fae.col), lwd = 2, bty = 'n', cex = 2)
 
 mtext("e", font = 2, line = 0.25, cex = 1.4,
-        at = par("usr")[1] - 10)
+        at = par("usr")[1] - 5)
 
 # T + DHT concentration
 
@@ -107,6 +107,6 @@ axis(1, at = xat, labels = format(dates, "%B 1st"))
 axis(2, las = 2)
 
 mtext("f", font = 2, line = 0.25, cex = 1.4,
-        at = par("usr")[1] - 10)
+        at = par("usr")[1] - 5)
 
-dev.off()
+#dev.off()

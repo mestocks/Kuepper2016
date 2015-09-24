@@ -1,7 +1,7 @@
 library(jpeg)
 
-tiff("fig1abcd.tiff", width = 4, height = 5, units = "in",
-     res = 400, pointsize = 5)
+#tiff("fig1abcd.tiff", width = 4, height = 5, units = "in",
+#     res = 400, pointsize = 5)
 
 jpeg.plot <- function(infile, pic.text, xlower = 0, ylower = 0, xupper = 1, yupper = 1) {
     pic <- readJPEG(infile)
@@ -21,8 +21,8 @@ allcex.axis <- 1.3
 allcex.lab <- 1.5
 
 # b, l, t, r - default: c(5, 4, 4, 2) + 0.1
-par(mfrow = c(4, 3), mar = c(3.5, 4, 2, 2) + 0.1,
-    cex.lab = allcex.lab, cex.axis = allcex.axis)
+#par(mfrow = c(4, 3), mar = c(3.5, 4, 2, 2) + 0.1,
+#    cex.lab = allcex.lab, cex.axis = allcex.axis)
 
 ## Figure a
 pos.indsat <- c(-0.025, -0.1, 1.025, 0.9)
@@ -171,4 +171,4 @@ boxplot(faeD$RESIDUAL.testes.volume, frame = FALSE, add = TRUE,
         col = general.blue, border = TRUE, axes = FALSE, outline = FALSE)
 axis(2, las = 2, at = seq(-2, 2, 1))
 
-dev.off()
+#dev.off()
