@@ -70,9 +70,9 @@ xvalues <- c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2)
 axis(1, labels = xvalues, at = xvalues * 1000000000)#, cex.axis = axislab.cex)
 axis(2, las = 2)#, cex.axis = axislab.cex)
 
-mtext(side = 1, text = "Position (Gbp)0", line = 0, cex = 1.75)
-mtext(side = 1, text = "Position (Gbp)1", line = 1, cex = 1.75)
-mtext(side = 1, text = "Position (Gbp)2", line = 2, cex = 1.75)
+#mtext(side = 1, text = "Position (Gbp)0", line = 0, cex = 1.75)
+#mtext(side = 1, text = "Position (Gbp)1", line = 1, cex = 1.75)
+mtext(side = 1, text = "Position (Gbp)", line = 4, cex = 1.75)
 
 points(fo.data$GenomePosition, -log10(fo.data$P1df),
      pch = 20, col = fo.data$colour, cex = pt.cex)
@@ -82,6 +82,8 @@ points(si.data$GenomePosition, -log10(si.data$P1df),
 
 lines(c(roi.lower, roi.lower), c(0, 4), lty = 2, lwd = 1.5, col = "grey15")
 lines(c(roi.upper, roi.upper), c(0, 4), lty = 2, lwd = 1.5, col = "grey15")
+
+mtext("c", side = 2, line = 3.5, cex = 2, font = 2, at = 7, las = 1)
 
 # plot 2
 
@@ -113,6 +115,8 @@ text.ypos <- -0.85
 text.cex <- 1.2
 text.yadj <- 0.25
 
+mtext("d", side = 2, line = 3.5, cex = 2, font = 2, at = 7, las = 1)
+
 # plot 3
 
 plot(0, 0,
@@ -134,4 +138,5 @@ axis(1, labels = zlabs, at = as.numeric(zlabs) * 1000000000,
 axis(2, las = 2, at = seq(0, 7))#, cex.axis = axislab.cex)
 mtext(side = 1, text = "Position (Gbp)", line = 1, cex = 1.75)
 
-#dev.off()
+mtext("e", side = 2, line = 3.5, cex = 2, font = 2, at = 7, las = 1)
+

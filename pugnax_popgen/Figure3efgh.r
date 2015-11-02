@@ -50,7 +50,7 @@ yaxis.line <- 0
 yaxis.textline <- 3.75
 
 gene.ypos <- ylimit[2] - 0.005
-genetext.ypos <- ylimit[2] - 0.003
+genetext.ypos <- ylimit[2] - 0.0025
 
 lwin <- "10k"
 nsteps <- "1k"
@@ -112,7 +112,8 @@ for (i in seq(1, length(contigs))) {
   points(fsat$V2 - contig.adj, rep(ylimit[2] - 0.0085,
                                    length(fsat$V2)), pch = 20, col = sat.col)
 
-  mtext(contig.letters[i], side = 2, line = 2, cex = 2, font = 2, at = 0.045, las = 1)
+  if (contig.letters[i] == "e") {
+      mtext(contig.letters[i], side = 2, line = 2, cex = 2, font = 2, at = 0.045, las = 1) }
   #mtext(contig.letters[i], font = 2, line = 0.25, cex = 1.4,
   #      at = par("usr")[1] + 0.005 * diff(par("usr")[1:2]))
 

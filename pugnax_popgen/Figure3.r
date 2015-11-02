@@ -1,6 +1,6 @@
 # default c(b, l, t, r) mar = c(5, 4, 4, 2) + 0.1
 
-tiff("Figure3.tiff", width = 9, height = 6, units = "in",
+tiff("Figure3v2.tiff", width = 9, height = 6, units = "in",
      res = 400, pointsize = 5)
 
 layout(matrix(c(1, 1, 1, 1, 1, 1,
